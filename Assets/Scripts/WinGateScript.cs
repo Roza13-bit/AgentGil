@@ -6,7 +6,7 @@ public class WinGateScript : MonoBehaviour
 {
     public CenterGuysSphereScript cgsSC;
 
-    private bool isLandingStarted = false;
+    public bool isLandingStarted = false;
 
     private void OnTriggerEnter(Collider other)
     {

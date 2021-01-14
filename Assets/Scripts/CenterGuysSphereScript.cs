@@ -14,6 +14,8 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     public float numberOfGuys;
 
+    public float sizeMultiply;
+
     public float radius;
 
     public float sphereXRotation;
@@ -81,7 +83,7 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     public void CombineForLandingSequance()
     {
-        var sizeMultiply = numberOfGuys;
+        sizeMultiply = numberOfGuys;
 
         foreach (Transform child in CenterSphere)
         {
@@ -95,6 +97,8 @@ public class CenterGuysSphereScript : MonoBehaviour
         InitCircleFormation();
 
         CenterSphere.GetComponentInChildren<Transform>().localScale = new Vector3(1f, 1f, 1f) * sizeMultiply;
+
+        transform.localPosition = new Vector3(-30f,0f,0f);
 
     }
 
