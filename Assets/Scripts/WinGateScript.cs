@@ -12,8 +12,9 @@ public class WinGateScript : MonoBehaviour
     {
         if (!isLandingStarted)
         {
-            cgsSC.CombineForLandingSequance();
             isLandingStarted = true;
+
+            StartCoroutine(cgsSC.CombineForLandingSequance());
 
         }
         

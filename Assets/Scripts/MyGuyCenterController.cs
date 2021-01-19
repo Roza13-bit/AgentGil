@@ -32,7 +32,7 @@ public class MyGuyCenterController : MonoBehaviour
 
         Vector3 viewPos = transform.position;
 
-        viewPos.x = Mathf.Clamp(viewPos.x, -30, 30);
+        viewPos.x = Mathf.Clamp(viewPos.x, -25, 25);
 
         transform.Translate(direction + downVector + forwardVector * Time.fixedDeltaTime);
 

@@ -9,6 +9,10 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     [SerializeField] Transform CenterSphere;
 
+    public MyGuyDivingMatScript mgdmSC;
+
+    public GameObject smokeHolderGO;
+
     [Header("Circle Controll")]
     public List<GameObject> myGuysList;
 
@@ -19,6 +23,33 @@ public class CenterGuysSphereScript : MonoBehaviour
     public float radius;
 
     public float sphereXRotation;
+
+    public float waitForCombineFloat = 0;
+
+    [Header("Landing Sequance Control")]
+    public float xRotMyGuys;
+
+    public float yRotMyGuys;
+
+    public float zRotMyGuys;
+
+    public float lerpTime;
+
+    public float moveMyGuysTime;
+
+    public float timeForRotateAndCombine;
+
+    [Header("Circle Controll")]
+    public Material[] myGuyBurningMaterialsArray = new Material[4];
+
+    public float changeSpeed;
+
+    private Quaternion startRot;
+    private Quaternion endRotPlus;
+    private Quaternion endRotMinus;
+    private Vector3 endRotMinusVector;
+    private Vector3 endRotPlusVector;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +65,7 @@ public class CenterGuysSphereScript : MonoBehaviour
         for (int i = 0; i < numberOfGuys; i++)
         {
             // Instantiate the prefab.
-            GameObject go = Instantiate(MyGuyPrefab, CenterSphere);
+            GameObject go = Instantiate(MyGuyPrefab, transform);
 
             myGuysList.Add(go);
 
@@ -81,11 +112,29 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     }
 
-    public void CombineForLandingSequance()
+    public IEnumerator CombineForLandingSequance()
     {
         sizeMultiply = numberOfGuys;
 
-        foreach (Transform child in CenterSphere)
+        endRotPlusVector = new Vector3(-xRotMyGuys, -yRotMyGuys, -zRotMyGuys);
+        endRotMinusVector = new Vector3(-xRotMyGuys, yRotMyGuys, zRotMyGuys);
+        endRotPlus.eulerAngles = endRotPlusVector;
+        endRotMinus.eulerAngles = endRotMinusVector;
+
+        foreach (Transform child in transform)
+        {
+            StartCoroutine(QuaternionRotateTowardsMyGuys(child));
+
+        }
+
+        yield return new WaitForSeconds(timeForRotateAndCombine);
+
+        DestroyAllInstantiateBigMyGuy();
+
+    }
+    public void DestroyAllInstantiateBigMyGuy()
+    {
+        foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
@@ -94,11 +143,81 @@ public class CenterGuysSphereScript : MonoBehaviour
 
         numberOfGuys = 1;
 
+        radius = 0;
+
         InitCircleFormation();
 
-        CenterSphere.GetComponentInChildren<Transform>().localScale = new Vector3(1f, 1f, 1f) * sizeMultiply;
+        transform.GetComponentInChildren<Transform>().localScale = new Vector3(1f, 1f, 1f) * sizeMultiply;
 
-        transform.localPosition = new Vector3(-30f,0f,0f);
+        smokeHolderGO.SetActive(true);
+
+        StartCoroutine(mgdmSC.ChangeMyGuyDivingColor());
+
+    }
+
+    public IEnumerator QuaternionRotateTowardsMyGuys(Transform child)
+    {
+        if (child.localPosition.x >= 0)
+        {
+            float timeSinceStartedPlus = 0f;
+            float timeSinceStartedMovingPlus = 0f;
+
+            while (true)
+            {
+                timeSinceStartedPlus += Time.deltaTime;
+                timeSinceStartedMovingPlus += Time.deltaTime;
+
+                Debug.Log("Entered Vector != 0 + " + timeSinceStartedMovingPlus);
+
+                startRot = child.localRotation;
+                //child.transform.localRotation = Quaternion.Slerp(startRot, Quaternion.Euler(endRotPlus.eulerAngles), lerpTime);
+                child.localRotation = Quaternion.RotateTowards(startRot, Quaternion.Euler(endRotPlus.eulerAngles), timeSinceStartedPlus * lerpTime);
+
+                child.localPosition = Vector3.MoveTowards(child.localPosition, Vector3.zero, timeSinceStartedMovingPlus * moveMyGuysTime);
+
+                // If the object has arrived, stop the coroutine
+                if (child.rotation == endRotPlus || child.localPosition == Vector3.zero)
+                {
+                    yield break;
+                }
+
+                // Otherwise, continue next frame
+                yield return null;
+
+            }
+
+        }
+
+        else if (child.localPosition.x < 0)
+        {
+            float timeSinceStartedMinus = 0f;
+            float timeSinceStartedMovingMinus = 0f;
+
+            while (true)
+            {
+                timeSinceStartedMinus += Time.deltaTime;
+                timeSinceStartedMovingMinus += Time.deltaTime;
+
+                Debug.Log("Entered Vector != 0 + " + timeSinceStartedMovingMinus);
+
+                startRot = child.transform.localRotation;
+                //child.transform.localRotation = Quaternion.Slerp(startRot, Quaternion.Euler(endRotMinus.eulerAngles), lerpTime);
+                child.transform.localRotation = Quaternion.RotateTowards(startRot, Quaternion.Euler(endRotMinus.eulerAngles), timeSinceStartedMinus * lerpTime);
+
+                child.localPosition = Vector3.MoveTowards(child.localPosition, Vector3.zero, timeSinceStartedMovingMinus * moveMyGuysTime);
+
+                // If the object has arrived, stop the coroutine
+                if (child.rotation == endRotMinus || child.localPosition == Vector3.zero)
+                {
+                    yield break;
+                }
+
+                // Otherwise, continue next frame
+                yield return null;
+
+            }
+
+        }
 
     }
 
