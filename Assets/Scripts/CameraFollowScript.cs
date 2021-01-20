@@ -30,7 +30,7 @@ public class CameraFollowScript : MonoBehaviour
 
             newPos.y = Mathf.Clamp(newPos.y, cameraEndY, 5000f);
 
-            newPos.z = Mathf.Clamp(newPos.z, 500f, cameraEndZ);
+            newPos.z = Mathf.Clamp(newPos.z, -2000f, cameraEndZ);
 
             transform.position = Vector3.Lerp(transform.position, newPos, 1f);
 

@@ -14,7 +14,8 @@ public class WinGateScript : MonoBehaviour
         {
             isLandingStarted = true;
 
-            StartCoroutine(cgsSC.CombineForLandingSequance());
+            StartCoroutine(cgsSC.StartSphereRotation());
+            cgsSC.StartMyGuyRotation();
 
         }
         

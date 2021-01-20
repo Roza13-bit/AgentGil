@@ -9,10 +9,6 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     [SerializeField] Transform CenterSphere;
 
-    public MyGuyDivingMatScript mgdmSC;
-
-    public GameObject smokeHolderGO;
-
     [Header("Circle Controll")]
     public List<GameObject> myGuysList;
 
@@ -27,35 +23,21 @@ public class CenterGuysSphereScript : MonoBehaviour
     public float waitForCombineFloat = 0;
 
     [Header("Landing Sequance Control")]
-    public float xRotMyGuys;
+    public float rotationSpeedMyGuy;
 
-    public float yRotMyGuys;
+    public float rotationSpeedSphere;
 
-    public float zRotMyGuys;
-
-    public float lerpTime;
-
-    public float moveMyGuysTime;
-
-    public float timeForRotateAndCombine;
-
-    [Header("Circle Controll")]
-    public Material[] myGuyBurningMaterialsArray = new Material[4];
-
-    public float changeSpeed;
-
-    private Quaternion startRot;
-    private Quaternion endRotPlus;
-    private Quaternion endRotMinus;
-    private Vector3 endRotMinusVector;
-    private Vector3 endRotPlusVector;
-
+    private Quaternion endRotSphere;
+    private Quaternion endRotMyGuy;
 
     // Start is called before the first frame update
     void Start()
     {
         myGuysList = new List<GameObject>();
         this.InitCircleFormation();
+
+        endRotSphere.eulerAngles = new Vector3(90f, 0f, 0f);
+        endRotMyGuy.eulerAngles = new Vector3(-160f, 0f, 0f);
 
     }
 
@@ -91,7 +73,7 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     private void UpdateCircle()
     {
-        for(var i = 0; i < myGuysList.Count; i++)
+        for (var i = 0; i < myGuysList.Count; i++)
         {
             // Get the angle of the current index being instantiated
             // from the center of the circle.
@@ -104,7 +86,7 @@ public class CenterGuysSphereScript : MonoBehaviour
             float y = Mathf.Sin(angle) * radius;
 
             // Set the position of the instantiated object to the targetPosition.
-            myGuysList[i].transform.localPosition = new Vector3( x, y, 0f);
+            myGuysList[i].transform.localPosition = new Vector3(x, y, 0f);
 
             // myGuysList[i].transform.LookAt(new Vector3(0f,0f,0f));
 
@@ -112,110 +94,59 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     }
 
-    public IEnumerator CombineForLandingSequance()
+    public void StartClansFight()
     {
-        sizeMultiply = numberOfGuys;
 
-        endRotPlusVector = new Vector3(-xRotMyGuys, -yRotMyGuys, -zRotMyGuys);
-        endRotMinusVector = new Vector3(-xRotMyGuys, yRotMyGuys, zRotMyGuys);
-        endRotPlus.eulerAngles = endRotPlusVector;
-        endRotMinus.eulerAngles = endRotMinusVector;
-
-        foreach (Transform child in transform)
-        {
-            StartCoroutine(QuaternionRotateTowardsMyGuys(child));
-
-        }
-
-        yield return new WaitForSeconds(timeForRotateAndCombine);
-
-        DestroyAllInstantiateBigMyGuy();
-
-    }
-    public void DestroyAllInstantiateBigMyGuy()
-    {
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
-
-        myGuysList.Clear();
-
-        numberOfGuys = 1;
-
-        radius = 0;
-
-        InitCircleFormation();
-
-        transform.GetComponentInChildren<Transform>().localScale = new Vector3(1f, 1f, 1f) * sizeMultiply;
-
-        smokeHolderGO.SetActive(true);
-
-        StartCoroutine(mgdmSC.ChangeMyGuyDivingColor());
 
     }
 
-    public IEnumerator QuaternionRotateTowardsMyGuys(Transform child)
+    public IEnumerator StartSphereRotation()
     {
-        if (child.localPosition.x >= 0)
+        var timeSinceStartedRotation = 0.0f;
+
+        while (true)
         {
-            float timeSinceStartedPlus = 0f;
-            float timeSinceStartedMovingPlus = 0f;
+            timeSinceStartedRotation += Time.deltaTime;
 
-            while (true)
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, endRotSphere, timeSinceStartedRotation * rotationSpeedSphere);
+
+            if (transform.localRotation == endRotSphere)
             {
-                timeSinceStartedPlus += Time.deltaTime;
-                timeSinceStartedMovingPlus += Time.deltaTime;
-
-                Debug.Log("Entered Vector != 0 + " + timeSinceStartedMovingPlus);
-
-                startRot = child.localRotation;
-                //child.transform.localRotation = Quaternion.Slerp(startRot, Quaternion.Euler(endRotPlus.eulerAngles), lerpTime);
-                child.localRotation = Quaternion.RotateTowards(startRot, Quaternion.Euler(endRotPlus.eulerAngles), timeSinceStartedPlus * lerpTime);
-
-                child.localPosition = Vector3.MoveTowards(child.localPosition, Vector3.zero, timeSinceStartedMovingPlus * moveMyGuysTime);
-
-                // If the object has arrived, stop the coroutine
-                if (child.rotation == endRotPlus || child.localPosition == Vector3.zero)
-                {
-                    yield break;
-                }
-
-                // Otherwise, continue next frame
-                yield return null;
-
+                yield break;
             }
+
+            yield return null;
 
         }
 
-        else if (child.localPosition.x < 0)
+    }
+
+    public void StartMyGuyRotation()
+    {
+        foreach (Transform child in transform)
         {
-            float timeSinceStartedMinus = 0f;
-            float timeSinceStartedMovingMinus = 0f;
+            StartCoroutine(StartRotCoroutine(child));
 
-            while (true)
+        }
+
+    }
+
+    public IEnumerator StartRotCoroutine(Transform child)
+    {
+        var timeSinceStartedMyGuyRotation = 0.0f;
+
+        while (true)
+        {
+            timeSinceStartedMyGuyRotation += Time.deltaTime;
+
+            child.localRotation = Quaternion.RotateTowards(child.localRotation, endRotMyGuy, timeSinceStartedMyGuyRotation * rotationSpeedMyGuy);
+
+            if (transform.localRotation == endRotSphere)
             {
-                timeSinceStartedMinus += Time.deltaTime;
-                timeSinceStartedMovingMinus += Time.deltaTime;
-
-                Debug.Log("Entered Vector != 0 + " + timeSinceStartedMovingMinus);
-
-                startRot = child.transform.localRotation;
-                //child.transform.localRotation = Quaternion.Slerp(startRot, Quaternion.Euler(endRotMinus.eulerAngles), lerpTime);
-                child.transform.localRotation = Quaternion.RotateTowards(startRot, Quaternion.Euler(endRotMinus.eulerAngles), timeSinceStartedMinus * lerpTime);
-
-                child.localPosition = Vector3.MoveTowards(child.localPosition, Vector3.zero, timeSinceStartedMovingMinus * moveMyGuysTime);
-
-                // If the object has arrived, stop the coroutine
-                if (child.rotation == endRotMinus || child.localPosition == Vector3.zero)
-                {
-                    yield break;
-                }
-
-                // Otherwise, continue next frame
-                yield return null;
-
+                yield break;
             }
+
+            yield return null;
 
         }
 
