@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CenterGuysSphereScript : MonoBehaviour
 {
     [Header("Cached References")]
     [SerializeField] GameObject MyGuyPrefab;
+
+    [SerializeField] MyGuyCenterController myGuyCenterSC;
 
     [SerializeField] Transform CenterSphere;
 
@@ -37,7 +40,7 @@ public class CenterGuysSphereScript : MonoBehaviour
         this.InitCircleFormation();
 
         endRotSphere.eulerAngles = new Vector3(90f, 0f, 0f);
-        endRotMyGuy.eulerAngles = new Vector3(-160f, 0f, 0f);
+        endRotMyGuy.eulerAngles = new Vector3(-90f, 0f, 0f);
 
     }
 
@@ -100,6 +103,16 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     }
 
+    public void StartMyGuyRotation()
+    {
+        foreach (Transform child in transform)
+        {
+            StartCoroutine(StartRotCoroutine(child));
+
+        }
+
+    }
+
     public IEnumerator StartSphereRotation()
     {
         var timeSinceStartedRotation = 0.0f;
@@ -112,20 +125,23 @@ public class CenterGuysSphereScript : MonoBehaviour
 
             if (transform.localRotation == endRotSphere)
             {
+                myGuyCenterSC.glideSpeed = 0;
+
+                myGuyCenterSC.fallSpeed = 0;
+
+                myGuyCenterSC.turnSpeed = 0;
+
+                foreach (Transform child in this.transform)
+                {
+                    // child.GetComponent<NavMeshAgent>().enabled = true;
+                }
+
+                CenterSphere.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
                 yield break;
             }
 
             yield return null;
-
-        }
-
-    }
-
-    public void StartMyGuyRotation()
-    {
-        foreach (Transform child in transform)
-        {
-            StartCoroutine(StartRotCoroutine(child));
 
         }
 

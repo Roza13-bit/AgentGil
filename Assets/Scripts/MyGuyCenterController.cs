@@ -7,16 +7,16 @@ public class MyGuyCenterController : MonoBehaviour
     [Header("Cached References")]
     [SerializeField] FloatingJoystick variableJoystick;
 
-    [SerializeField] CharacterController myGuyCC;
-
     [SerializeField] MyGuysAttachController myGuyAttach;
 
     [Header("Movement Controlls")]
-    [SerializeField] float turnSpeed = 10f;
+    public float turnSpeed = 10f;
 
-    [SerializeField] float fallSpeed = -10f;
+    public float fallSpeed = -10f;
 
-    [SerializeField] float glideSpeed = 65f;
+    public float glideSpeed = 65f;
+
+    public float myGuyBorder;
 
     private void Start()
     {
@@ -32,7 +32,7 @@ public class MyGuyCenterController : MonoBehaviour
 
         Vector3 viewPos = transform.position;
 
-        viewPos.x = Mathf.Clamp(viewPos.x, -25, 25);
+        viewPos.x = Mathf.Clamp(viewPos.x, -myGuyBorder, myGuyBorder);
 
         transform.Translate(direction + downVector + forwardVector * Time.fixedDeltaTime);
 

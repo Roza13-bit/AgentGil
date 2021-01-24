@@ -14,13 +14,7 @@ public class BirdControllerScript : MonoBehaviour
     {
         if (other.CompareTag("MyGuy"))
         {
-            this.gameObject.GetComponent<Collider>().enabled = false;
-            
-            other.transform.SetParent(null);
-
-            other.attachedRigidbody.useGravity = true;
-
-            other.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = greyMat;
+            MyGuyDeathSequance(other);
 
             foreach (Transform child in instanceCenterSphere)
             {
@@ -32,11 +26,19 @@ public class BirdControllerScript : MonoBehaviour
 
             cgsSC.numberOfGuys--;
 
-            Debug.Log("Number Of Guys: " + cgsSC.numberOfGuys);
-
             cgsSC.InitCircleFormation();
 
-        }    
+        }
+
+    }
+
+    private void MyGuyDeathSequance(Collider other)
+    {
+        this.gameObject.GetComponent<Collider>().enabled = false;
+
+        other.transform.SetParent(null);
+
+        other.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = greyMat;
 
     }
 

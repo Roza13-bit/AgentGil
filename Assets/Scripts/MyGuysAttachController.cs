@@ -12,8 +12,6 @@ public class MyGuysAttachController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collided");
-
         if (other.CompareTag("MyGuy"))
         {
             foreach (Transform child in instanceCenterSphere)

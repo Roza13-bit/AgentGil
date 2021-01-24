@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MyGuy
   - Obstacle
+  - Enemy
+  - HitStand
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - Obstacle
+  - HitGround
   - 
   - 
   - 
