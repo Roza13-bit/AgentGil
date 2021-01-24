@@ -450,7 +450,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0fa6cad9f5f94408ce7163229705cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fightingDistance: 15
+  fightingDistance: 8
+  fightSpot: {fileID: 6604652527116354144, guid: ed86a169799ed1b4081cd3bc04d4090f,
+    type: 3}
 --- !u!65 &8543115324280861311
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -507,7 +509,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

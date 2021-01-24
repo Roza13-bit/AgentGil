@@ -11,11 +11,13 @@ public class PointMeterScript : MonoBehaviour
 
     public Camera cam;
 
-    public GameObject decalRed;
+    public GameObject paintSplashEnemy;
+
+    public GameObject paintSplashAlly;
 
     public Rigidbody centerSphereRB;
 
-    public Transform fightingSpot;
+    public Transform[] fightingSpot = new Transform[3];
 
     public Transform instanceSphereGO;
 
@@ -102,9 +104,27 @@ public class PointMeterScript : MonoBehaviour
 
     private void StartAllyAttack()
     {
+        int allyCounter = 3;
+
         foreach (NavMeshAgent allyAgent in allyNavMesh)
         {
-            allyAgent.SetDestination(fightingSpot.position);
+            if (allyCounter % 3 == 0)
+            {
+                allyAgent.SetDestination(fightingSpot[0].position);
+
+            }
+            else if (allyCounter % 3 == 1)
+            {
+                allyAgent.SetDestination(fightingSpot[1].position);
+
+            }
+            else if (allyCounter % 3 == 2)
+            {
+                allyAgent.SetDestination(fightingSpot[2].position);
+
+            }
+
+            allyCounter++;
 
         }
 
@@ -118,9 +138,27 @@ public class PointMeterScript : MonoBehaviour
 
         }
 
+        int enemyCounter = 3;
+
         foreach (NavMeshAgent enemyAgent in enemyNavMesh)
         {
-            enemyAgent.SetDestination(fightingSpot.position);
+            if (enemyCounter % 3 == 0)
+            {
+                enemyAgent.SetDestination(fightingSpot[0].position);
+
+            }
+            else if (enemyCounter % 3 == 1)
+            {
+                enemyAgent.SetDestination(fightingSpot[1].position);
+
+            }
+            else if (enemyCounter % 3 == 2)
+            {
+                enemyAgent.SetDestination(fightingSpot[2].position);
+
+            }
+
+            enemyCounter++;
 
         }
 
@@ -178,16 +216,14 @@ public class PointMeterScript : MonoBehaviour
         Debug.Log("Random enemy num : " + randomEnemy);
         Debug.Log("Random ally num : " + randomAlly);
 
-        Quaternion rot = Quaternion.Euler(90f, 0f, 0f);
-
-        var enemydecal = Instantiate(decalRed, enemyNavMesh[randomEnemy].transform.position, rot);
+        var enemydecal = Instantiate(paintSplashEnemy, enemyNavMesh[randomEnemy].transform.position, Quaternion.identity);
         Destroy(enemyNavMesh[randomEnemy].gameObject);
         enemyNavMesh.RemoveAt(randomEnemy);
         enemyAnimator.RemoveAt(randomEnemy);
         Debug.Log("Enemy list count : " + enemyNavMesh.Count);
 
 
-        var allydecal = Instantiate(decalRed, allyNavMesh[randomAlly].transform.position, rot);
+        var allydecal = Instantiate(paintSplashAlly, allyNavMesh[randomAlly].transform.position, Quaternion.identity);
         Destroy(allyNavMesh[randomAlly].gameObject);
         allyNavMesh.RemoveAt(randomAlly);
         allyAnimator.RemoveAt(randomAlly);

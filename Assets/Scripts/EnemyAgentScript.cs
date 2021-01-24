@@ -8,6 +8,8 @@ public class EnemyAgentScript : MonoBehaviour
 {
     public float fightingDistanceEnemy;
 
+    public Transform fightSpot;
+
     private void Update()
     {
         if (transform.GetComponent<NavMeshAgent>().hasPath)
@@ -27,6 +29,11 @@ public class EnemyAgentScript : MonoBehaviour
             reached = true;
 
             transform.GetComponent<NavMeshAgent>().isStopped = true;
+
+            Vector3 DeltaVec = (fightSpot.position - transform.position);
+            DeltaVec.y = 0.0f;
+
+            transform.rotation = Quaternion.LookRotation(DeltaVec);
 
             transform.GetComponent<Animator>().SetTrigger("startPunchAnime");
 
