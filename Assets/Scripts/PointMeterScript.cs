@@ -11,19 +11,15 @@ public class PointMeterScript : MonoBehaviour
 
     public Camera cam;
 
+    public CameraFollowScript camFollowSC;
+
     public GameObject paintSplashEnemy;
 
     public GameObject paintSplashAlly;
 
-    public Rigidbody centerSphereRB;
-
     public Transform[] fightingSpot = new Transform[3];
 
     public Transform instanceSphereGO;
-
-    public AllyAgentScript allyAgentSC;
-
-    public EnemyAgentScript enemyAgentSC;
 
     public List<NavMeshAgent> enemyNavMesh = new List<NavMeshAgent>();
 
@@ -83,7 +79,7 @@ public class PointMeterScript : MonoBehaviour
     private IEnumerator StartCameraCloseup()
     {
         var timeSinceStarted = 0.0f;
-        var endPos = new Vector3(0f, 68f, 1877.4f);
+        var endPos = new Vector3(0f, camFollowSC.cameraEndY, camFollowSC.cameraEndZ);
 
         while (true)
         {

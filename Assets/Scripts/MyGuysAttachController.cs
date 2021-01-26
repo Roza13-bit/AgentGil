@@ -12,19 +12,14 @@ public class MyGuysAttachController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        gameObject.GetComponent<Collider>().enabled = false;
+
         if (other.CompareTag("MyGuy"))
         {
-            foreach (Transform child in instanceCenterSphere)
-            {
-                Destroy(child.gameObject);
-
-            }
-
-            cgsSC.myGuysList.Clear();
-
             cgsSC.numberOfGuys++;
+            Debug.Log("number of guys " + cgsSC.numberOfGuys);
 
-            cgsSC.InitCircleFormation();
+            cgsSC.InitFormation(other.gameObject);
 
             Destroy(this.gameObject);
 

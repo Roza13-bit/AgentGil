@@ -124,6 +124,6 @@ MonoBehaviour:
   winGateSC: {fileID: 0}
   myGuyTransform: {fileID: 0}
   followDownRange: 92
-  followBackRange: 100.5
+  followBackRange: 105
   cameraEndY: 68
-  cameraEndZ: 1877.4
+  cameraEndZ: 1965

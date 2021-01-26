@@ -8,27 +8,40 @@ public class BirdControllerScript : MonoBehaviour
     public Transform instanceCenterSphere;
     public Material greyMat;
 
-    private float touchedCounter = 0f;
+    private bool hasCollidedObject = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("MyGuy"))
+        if (hasCollidedObject)
         {
+            return;
+        }
+        else if (!hasCollidedObject)
+        {
+            hasCollidedObject = true;
+
+            Debug.Log("TRIGER");
+
+            Debug.Log("Object name : " + other.name + "Object Pos : " + other.transform.position);
+
             MyGuyDeathSequance(other);
 
-            foreach (Transform child in instanceCenterSphere)
-            {
-                Destroy(child.gameObject);
-
-            }
-
-            cgsSC.myGuysList.Clear();
-
-            cgsSC.numberOfGuys--;
-
-            cgsSC.InitCircleFormation();
+            StartCoroutine(WaitBeforeRemoving(other));
 
         }
+
+    }
+
+    private IEnumerator WaitBeforeRemoving(Collider other)
+    {
+        var numOfGuysReduced = cgsSC.numberOfGuys;
+
+        cgsSC.numberOfGuys--;
+        Debug.Log("number of guys " + cgsSC.numberOfGuys);
+
+        cgsSC.InitFormation(other.gameObject);
+
+        yield return null;
 
     }
 

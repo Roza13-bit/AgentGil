@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5036387513907142108}
   - component: {fileID: 5036387513907142111}
   - component: {fileID: 5036387513907142106}
+  - component: {fileID: 1700379116}
   m_Layer: 10
   m_Name: HitStand
   m_TagString: HitStand
@@ -89,7 +90,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5036387513907141921}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -108,15 +109,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cgsSC: {fileID: 0}
   cam: {fileID: 0}
-  decalRed: {fileID: 1101508859488858026, guid: 43bd89952d0462d4083fcddc2ba4ce6c,
+  camFollowSC: {fileID: 0}
+  paintSplashEnemy: {fileID: 4744555955068923807, guid: 7113a0c53d6bc734c8df2f7a8ecf9034,
     type: 3}
-  centerSphereRB: {fileID: 0}
-  fightingSpot: {fileID: 0}
+  paintSplashAlly: {fileID: 4744555955068923807, guid: 63fd92e151c41d24b805e51d0b13759a,
+    type: 3}
+  fightingSpot:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   instanceSphereGO: {fileID: 0}
-  allyAgentSC: {fileID: -7669013924349802185, guid: d52b987ffeed79644b4f3923e5c55917,
-    type: 3}
-  enemyAgentSC: {fileID: 8530830045863406329, guid: c39699f7bea7e74459c4c90d7c727cc6,
-    type: 3}
   enemyNavMesh:
   - {fileID: 0}
   - {fileID: 0}
@@ -134,7 +136,20 @@ MonoBehaviour:
   - {fileID: 0}
   allyAnimator: []
   isLanded: 0
-  camZoomSpeed: 0.2
-  waitBeforeKillingTime: 7
-  minKillTime: 1.5
-  maxKillTime: 3
+  camZoomSpeed: 0.05
+  waitBeforeKillingTime: 8
+  minKillTime: 1
+  maxKillTime: 1.5
+--- !u!65 &1700379116
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5036387513907141921}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
