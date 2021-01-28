@@ -12,23 +12,13 @@ public class BirdControllerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasCollidedObject)
-        {
-            return;
-        }
-        else if (!hasCollidedObject)
-        {
-            hasCollidedObject = true;
+            MyGuyDeathSequance(other);
 
             Debug.Log("TRIGER");
 
             Debug.Log("Object name : " + other.name + "Object Pos : " + other.transform.position);
 
-            MyGuyDeathSequance(other);
-
             StartCoroutine(WaitBeforeRemoving(other));
-
-        }
 
     }
 
@@ -37,6 +27,7 @@ public class BirdControllerScript : MonoBehaviour
         var numOfGuysReduced = cgsSC.numberOfGuys;
 
         cgsSC.numberOfGuys--;
+
         Debug.Log("number of guys " + cgsSC.numberOfGuys);
 
         cgsSC.InitFormation(other.gameObject);
@@ -48,10 +39,6 @@ public class BirdControllerScript : MonoBehaviour
     private void MyGuyDeathSequance(Collider other)
     {
         this.gameObject.GetComponent<Collider>().enabled = false;
-
-        other.transform.SetParent(null);
-
-        other.GetComponentInChildren<SkinnedMeshRenderer>().sharedMaterial = greyMat;
 
     }
 

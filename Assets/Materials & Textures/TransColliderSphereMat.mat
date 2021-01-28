@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StylisedWater
-  m_Shader: {fileID: -6465566751694194690, guid: e5dc31758db11e4458797c5ae084bf22,
+  m_Name: TransColliderSphereMat
+  m_Shader: {fileID: -6465566751694194690, guid: 27934a5796a181e45b863c823215b5ae,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -16,7 +16,8 @@ Material:
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -32,14 +33,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _FlowMap:
-        m_Texture: {fileID: 2800000, guid: b5a3094051c2f5249b5177737504a1fc, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _FoamTex:
-        m_Texture: {fileID: 2800000, guid: f719646d707cf0e48848212808567a41, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -52,58 +45,44 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2DLOD_73A37BFF_Texture_1:
-        m_Texture: {fileID: 2800000, guid: b5a3094051c2f5249b5177737504a1fc, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _VoronoiTex:
-        m_Texture: {fileID: 2800000, guid: 88cbd3fdc23076849b839a98d84f1caa, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_1F719942: 0
+    - Vector1_3AE8A4D1: 3.5
+    - Vector1_3D31C57F: 0.17
+    - Vector1_F28C2DC0: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _Choppiness: 0.1
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EnvironmentReflections: 1
-    - _FlowSpeed: 0.13
-    - _FlowStrength: 0.17
-    - _FoamDistance: 1.7
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Opacity: 0.89
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Size: 4000
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Speed: 0.05
-    - _SrcBlend: 1
-    - _Strength: 0.0025
-    - _Surface: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _WorkflowMode: 1
-    - _ZWrite: 1
+    - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _DarkFoamColor: {r: 0.08009967, g: 0.4103107, b: 0.6792453, a: 1}
+    - Color_3E502C63: {r: 0, g: 0, b: 0, a: 0}
+    - Color_BE568849: {r: 0.7058824, g: 1.2078432, b: 4, a: 1}
+    - _BaseColor: {r: 0.8773585, g: 0.8272281, b: 0.0041384934, a: 0.14901961}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
-    - _LightFoamColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _WaterColor: {r: 0.26717696, g: 0.51252466, b: 0.7169812, a: 1}
---- !u!114 &525813983808830983
+--- !u!114 &7582769428823630895
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

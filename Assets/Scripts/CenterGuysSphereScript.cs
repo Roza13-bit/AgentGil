@@ -69,7 +69,7 @@ public class CenterGuysSphereScript : MonoBehaviour
     public void InitFormation(GameObject go)
     {
         // Loop through the number of points in the circle.
-        for (int i = 0; i < numberOfGuys + 1; i++)
+        for (int i = 0; i < numberOfGuys; i++)
         {
             if (numberOfGuys > myGuysList.Count)
             {
@@ -93,9 +93,16 @@ public class CenterGuysSphereScript : MonoBehaviour
 
                 }
 
-                if (numberOfGuys < myGuysList.Count)
+                Debug.Log("Num Of Guys Before Adjust : " + numberOfGuys);
+                Debug.Log("Num Of Guys In List Before Adjust : " + myGuysList.Count);
+
+                if (numberOfGuys != myGuysList.Count)
                 {
-                    numberOfGuys++;
+                    numberOfGuys = myGuysList.Count;
+
+                    Debug.Log("Num Of Guys After Adjust : " + numberOfGuys);
+                    Debug.Log("Num Of Guys In List Before Adjust : " + myGuysList.Count);
+
                 }
 
             }
@@ -208,18 +215,22 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     private IEnumerator LineLerp2(Vector3 targetPosition, GameObject myGuyLine)
     {
-        var timeSinceStarted = 0.0f;
-
-        while (true)
+        yield return new WaitForSeconds(0.08f);
+        if (numberOfGuys == 2 && myGuysList.Count == 2)
         {
-            myGuyLine.transform.localPosition = Vector3.Lerp(myGuyLine.transform.localPosition, targetPosition, timeSinceStarted * formationSpeed);
-            timeSinceStarted += Time.deltaTime;
+            var timeSinceStarted = 0.0f;
 
-            if (myGuyLine.transform.localPosition == targetPosition)
+            while (true)
             {
-                yield break;
+                myGuyLine.transform.localPosition = Vector3.Lerp(myGuyLine.transform.localPosition, targetPosition, timeSinceStarted * formationSpeed);
+                timeSinceStarted += Time.deltaTime;
+
+                if (myGuyLine.transform.localPosition == targetPosition)
+                {
+                    yield break;
+                }
+                yield return null;
             }
-            yield return null;
         }
     }
 
@@ -258,18 +269,22 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     private IEnumerator TriangleLerp3(Vector3 targetPosition, GameObject myGuyTriangle)
     {
-        var timeSinceStarted = 0.0f;
-
-        while (true)
+        yield return new WaitForSeconds(0.08f);
+        if (numberOfGuys == 3 && myGuysList.Count == 3)
         {
-            myGuyTriangle.transform.localPosition = Vector3.Lerp(myGuyTriangle.transform.localPosition, targetPosition, timeSinceStarted * formationSpeed);
-            timeSinceStarted += Time.deltaTime;
+            var timeSinceStarted = 0.0f;
 
-            if (myGuyTriangle.transform.localPosition == targetPosition)
+            while (true)
             {
-                yield break;
+                myGuyTriangle.transform.localPosition = Vector3.Lerp(myGuyTriangle.transform.localPosition, targetPosition, timeSinceStarted * formationSpeed);
+                timeSinceStarted += Time.deltaTime;
+
+                if (myGuyTriangle.transform.localPosition == targetPosition)
+                {
+                    yield break;
+                }
+                yield return null;
             }
-            yield return null;
         }
     }
 
@@ -307,18 +322,22 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     private IEnumerator TriangleLerp6(Vector3 targetPosition, GameObject myGuyTriangle)
     {
-        var timeSinceStarted = 0.0f;
-
-        while (true)
+        yield return new WaitForSeconds(0.08f);
+        if (numberOfGuys == 6 && myGuysList.Count == 6)
         {
-            myGuyTriangle.transform.localPosition = Vector3.Lerp(myGuyTriangle.transform.localPosition, targetPosition, timeSinceStarted * formationSpeed);
-            timeSinceStarted += Time.deltaTime;
+            var timeSinceStarted = 0.0f;
 
-            if (myGuyTriangle.transform.localPosition == targetPosition)
+            while (true)
             {
-                yield break;
+                myGuyTriangle.transform.localPosition = Vector3.Lerp(myGuyTriangle.transform.localPosition, targetPosition, timeSinceStarted * formationSpeed);
+                timeSinceStarted += Time.deltaTime;
+
+                if (myGuyTriangle.transform.localPosition == targetPosition)
+                {
+                    yield break;
+                }
+                yield return null;
             }
-            yield return null;
         }
 
 
@@ -338,7 +357,7 @@ public class CenterGuysSphereScript : MonoBehaviour
             {
                 if (i == 3 && x == 1)
                 {
-                    GameObject myGuyTriangle = Instantiate(emptyHolderGO, transform);
+                    GameObject myGuyTriangle = Instantiate(emptyHolderGO);
 
                     targetPosition = new Vector3(targetPosition.x + xOffsetTri, targetPosition.y, 0f);
 
@@ -373,18 +392,22 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     private IEnumerator TriangleLerp9(Vector3 targetPosition, GameObject myGuyTriangle)
     {
-        var timeSinceStarted = 0.0f;
-
-        while (true)
+        yield return new WaitForSeconds(0.08f);
+        if (numberOfGuys == 9 && myGuysList.Count == 9)
         {
-            myGuyTriangle.transform.localPosition = Vector3.Lerp(myGuyTriangle.transform.localPosition, targetPosition, timeSinceStarted * formationSpeed);
-            timeSinceStarted += Time.deltaTime;
+            var timeSinceStarted = 0.0f;
 
-            if (myGuyTriangle.transform.localPosition == targetPosition)
+            while (true)
             {
-                yield break;
+                myGuyTriangle.transform.localPosition = Vector3.Lerp(myGuyTriangle.transform.localPosition, targetPosition, timeSinceStarted * formationSpeed);
+                timeSinceStarted += Time.deltaTime;
+
+                if (myGuyTriangle.transform.localPosition == targetPosition)
+                {
+                    yield break;
+                }
+                yield return null;
             }
-            yield return null;
         }
 
     }
@@ -456,21 +479,26 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     }
 
-    private  IEnumerator SquareLerp4(Vector3 targetpostion, GameObject myGuySquare)
+    private IEnumerator SquareLerp4(Vector3 targetpostion, GameObject myGuySquare)
     {
-        var timeSinceStarted = 0.0f;
-
-        while (true)
+        yield return new WaitForSeconds(0.08f);
+        if (numberOfGuys == 4 && myGuysList.Count == 4)
         {
-            myGuySquare.transform.localPosition = Vector3.Lerp(myGuySquare.transform.localPosition, targetpostion, timeSinceStarted * formationSpeed);
-            timeSinceStarted += Time.deltaTime;
+            var timeSinceStarted = 0.0f;
 
-            if (myGuySquare.transform.localPosition == targetpostion)
+            while (true)
             {
-                yield break;
+                myGuySquare.transform.localPosition = Vector3.Lerp(myGuySquare.transform.localPosition, targetpostion, timeSinceStarted * formationSpeed);
+                timeSinceStarted += Time.deltaTime;
+
+                if (myGuySquare.transform.localPosition == targetpostion)
+                {
+                    yield break;
+                }
+                yield return null;
             }
-            yield return null;
         }
+
     }
 
     private void UpdateSquare8()
@@ -554,19 +582,24 @@ public class CenterGuysSphereScript : MonoBehaviour
     }
 
     private IEnumerator SquareLerp8(Vector3 targetpostion, GameObject myGuySquare)
+
     {
-        var timeSinceStarted = 0.0f;
-
-        while (true)
+        yield return new WaitForSeconds(0.08f);
+        if (numberOfGuys == 8 && myGuysList.Count == 8)
         {
-            myGuySquare.transform.localPosition = Vector3.Lerp(myGuySquare.transform.localPosition, targetpostion, timeSinceStarted * formationSpeed);
-            timeSinceStarted += Time.deltaTime;
+            var timeSinceStarted = 0.0f;
 
-            if (myGuySquare.transform.localPosition == targetpostion)
+            while (true)
             {
-                yield break;
+                myGuySquare.transform.localPosition = Vector3.Lerp(myGuySquare.transform.localPosition, targetpostion, timeSinceStarted * formationSpeed);
+                timeSinceStarted += Time.deltaTime;
+
+                if (myGuySquare.transform.localPosition == targetpostion)
+                {
+                    yield break;
+                }
+                yield return null;
             }
-            yield return null;
         }
     }
 
@@ -647,18 +680,22 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     private IEnumerator SquareLerp12(Vector3 targetpostion, GameObject myGuySquare)
     {
-        var timeSinceStarted = 0.0f;
-
-        while (true)
+        yield return new WaitForSeconds(0.08f);
+        if (numberOfGuys == 12 && myGuysList.Count == 12)
         {
-            myGuySquare.transform.localPosition = Vector3.Lerp(myGuySquare.transform.localPosition, targetpostion, timeSinceStarted * formationSpeed);
-            timeSinceStarted += Time.deltaTime;
+            var timeSinceStarted = 0.0f;
 
-            if (myGuySquare.transform.localPosition == targetpostion)
+            while (true)
             {
-                yield break;
+                myGuySquare.transform.localPosition = Vector3.Lerp(myGuySquare.transform.localPosition, targetpostion, timeSinceStarted * formationSpeed);
+                timeSinceStarted += Time.deltaTime;
+
+                if (myGuySquare.transform.localPosition == targetpostion)
+                {
+                    yield break;
+                }
+                yield return null;
             }
-            yield return null;
         }
 
     }
@@ -686,19 +723,26 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     private IEnumerator CircleLerp(int i, float x, float y)
     {
-        var timeSinceStarted = 0.0f;
+        yield return new WaitForSeconds(0.08f);
 
-        while (true)
+        if (numberOfGuys == 5 && myGuysList.Count == 5 || numberOfGuys == 7 && myGuysList.Count == 7 ||
+            numberOfGuys == 10 && myGuysList.Count == 10 || numberOfGuys == 11 && myGuysList.Count == 11)
         {
-            // Set the position of the instantiated object to the targetPosition.
-            myGuysList[i].transform.localPosition = Vector3.Lerp(myGuysList[i].transform.localPosition, new Vector3(x, y, 0f), timeSinceStarted * formationSpeed);
-            timeSinceStarted += Time.deltaTime;
+            var timeSinceStarted = 0.0f;
 
-            if (myGuysList[i].transform.localPosition == new Vector3(x, y, 0f))
+            while (true)
             {
-                yield break;
+                // Set the position of the instantiated object to the targetPosition.
+                myGuysList[i].transform.localPosition = Vector3.Lerp(myGuysList[i].transform.localPosition, new Vector3(x, y, 0f), timeSinceStarted * formationSpeed);
+                timeSinceStarted += Time.deltaTime;
+
+                if (myGuysList[i].transform.localPosition == new Vector3(x, y, 0f))
+                {
+                    yield break;
+                }
+                yield return null;
             }
-            yield return null;
+
         }
 
     }
