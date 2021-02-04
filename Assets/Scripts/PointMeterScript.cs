@@ -6,284 +6,307 @@ using UnityEngine.AI;
 
 public class PointMeterScript : MonoBehaviour
 {
-    [Header("Public Cached References")]
-    public CenterGuysSphereScript cgsSC;
+    [Header ("Serialized References")]
 
-    public Camera cam;
+    [SerializeField] CenterGuysSphereScript cgsSC;
 
-    public CameraFollowScript camFollowSC;
+    [SerializeField] MyGuyCenterController myGuyccSC;
 
-    public GameObject paintSplashEnemy;
-
-    public GameObject paintSplashAlly;
-
-    public Transform[] fightingSpot = new Transform[3];
-
-    public Transform instanceSphereGO;
-
-    public List<NavMeshAgent> enemyNavMesh = new List<NavMeshAgent>();
-
-    public List<NavMeshAgent> allyNavMesh = new List<NavMeshAgent>();
-
-    public List<Animator> enemyAnimator = new List<Animator>();
-
-    public List<Animator> allyAnimator = new List<Animator>();
-
-    public bool isLanded = false;
-
-    public float camZoomSpeed;
-
-    public float waitBeforeKillingTime;
-
-    public float minKillTime;
-
-    public float maxKillTime;
-
-    private bool isKillStarted = false;
+    [SerializeField] CameraFollowScript cameraSC;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("MyGuy"))
+        myGuyccSC.fallSpeed = 0;
+
+        myGuyccSC.glideSpeed = 0;
+
+        cameraSC.isLanded = true;
+
+        foreach (GameObject item in cgsSC.guysParachute)
         {
-            isLanded = true;
-
-            foreach (Transform child in instanceSphereGO)
-            {
-                child.SetParent(null);
-                child.GetComponent<NavMeshAgent>().enabled = true;
-                allyNavMesh.Add(child.GetComponent<NavMeshAgent>());
-                allyAnimator.Add(child.GetComponent<Animator>());
-                child.GetComponent<Animator>().enabled = true;
-            }
-
-            StartAllyAttack();
-
-            StartEnemyAttack();
-
-            StartCoroutine(StartCameraCloseup());
-
-            if (!isKillStarted)
-            {
-                isKillStarted = true;
-
-                StartCoroutine(StartKillingUnits());
-
-            }
-
-
+            item.SetActive(false);
 
         }
 
     }
 
-    private IEnumerator StartCameraCloseup()
-    {
-        var timeSinceStarted = 0.0f;
-        var endPos = new Vector3(0f, camFollowSC.cameraEndY, camFollowSC.cameraEndZ);
+    //[Header("Public Cached References")]
+    //public CenterGuysSphereScript cgsSC;
 
-        while (true)
-        {
-            timeSinceStarted += Time.deltaTime;
+    //public Camera cam;
 
-            cam.transform.position = Vector3.MoveTowards(cam.transform.position, endPos, timeSinceStarted * camZoomSpeed);
+    //public CameraFollowScript camFollowSC;
 
-            if (cam.transform.position == endPos)
-            {
-                yield break;
-            }
+    //public GameObject paintSplashEnemy;
 
-            yield return null;
+    //public GameObject paintSplashAlly;
 
-        }
+    //public Transform[] fightingSpot = new Transform[3];
 
-    }
+    //public Transform instanceSphereGO;
 
-    private void StartAllyAttack()
-    {
-        int allyCounter = 3;
+    //public List<NavMeshAgent> enemyNavMesh = new List<NavMeshAgent>();
 
-        foreach (NavMeshAgent allyAgent in allyNavMesh)
-        {
-            if (allyCounter % 3 == 0)
-            {
-                allyAgent.SetDestination(fightingSpot[0].position);
+    //public List<NavMeshAgent> allyNavMesh = new List<NavMeshAgent>();
 
-            }
-            else if (allyCounter % 3 == 1)
-            {
-                allyAgent.SetDestination(fightingSpot[1].position);
+    //public List<Animator> enemyAnimator = new List<Animator>();
 
-            }
-            else if (allyCounter % 3 == 2)
-            {
-                allyAgent.SetDestination(fightingSpot[2].position);
+    //public List<Animator> allyAnimator = new List<Animator>();
 
-            }
+    //public bool isLanded = false;
 
-            allyCounter++;
+    //public float camZoomSpeed;
 
-        }
+    //public float waitBeforeKillingTime;
 
-    }
+    //public float minKillTime;
 
-    public void StartEnemyAttack()
-    {
-        foreach (Animator enemyAnime in enemyAnimator)
-        {
-            enemyAnime.SetTrigger("startRunAnime");
+    //public float maxKillTime;
 
-        }
+    //private bool isKillStarted = false;
 
-        int enemyCounter = 3;
+    ////private void OnTriggerEnter(Collider other)
+    ////{
+    ////    if (other.gameObject.CompareTag("MyGuy"))
+    ////    {
+    ////        isLanded = true;
 
-        foreach (NavMeshAgent enemyAgent in enemyNavMesh)
-        {
-            if (enemyCounter % 3 == 0)
-            {
-                enemyAgent.SetDestination(fightingSpot[0].position);
+    ////        foreach (Transform child in instanceSphereGO)
+    ////        {
+    ////            child.SetParent(null);
+    ////            child.GetComponent<NavMeshAgent>().enabled = true;
+    ////            allyNavMesh.Add(child.GetComponent<NavMeshAgent>());
+    ////            allyAnimator.Add(child.GetComponent<Animator>());
+    ////            child.GetComponent<Animator>().enabled = true;
+    ////        }
 
-            }
-            else if (enemyCounter % 3 == 1)
-            {
-                enemyAgent.SetDestination(fightingSpot[1].position);
+    ////        StartAllyAttack();
 
-            }
-            else if (enemyCounter % 3 == 2)
-            {
-                enemyAgent.SetDestination(fightingSpot[2].position);
+    ////        StartEnemyAttack();
 
-            }
+    ////        StartCoroutine(StartCameraCloseup());
 
-            enemyCounter++;
+    ////        if (!isKillStarted)
+    ////        {
+    ////            isKillStarted = true;
 
-        }
+    ////            StartCoroutine(StartKillingUnits());
 
-    }
+    ////        }
 
-    public IEnumerator StartKillingUnits()
-    {
-        Debug.Log("Start killing units wait...");
 
-        yield return new WaitForSeconds(waitBeforeKillingTime);
 
-        while (true)
-        {
-            KillOneUnit();
+    ////    }
 
-            if (enemyNavMesh.Count <= 0)
-            {
-                Debug.Log("Ally won");
+    ////}
 
-                foreach (Animator allyAnime in allyAnimator)
-                {
-                    allyAnime.SetTrigger("allyDanceAnime");
+    //private IEnumerator StartCameraCloseup()
+    //{
+    //    var timeSinceStarted = 0.0f;
+    //    var endPos = new Vector3(0f, camFollowSC.cameraEndY, camFollowSC.cameraEndZ);
 
-                }
+    //    while (true)
+    //    {
+    //        timeSinceStarted += Time.deltaTime;
 
-                yield break;
+    //        cam.transform.position = Vector3.MoveTowards(cam.transform.position, endPos, timeSinceStarted * camZoomSpeed);
 
-            }
+    //        if (cam.transform.position == endPos)
+    //        {
+    //            yield break;
+    //        }
 
-            if (allyNavMesh.Count <= 0)
-            {
-                Debug.Log("Enemy won");
+    //        yield return null;
 
-                foreach (Animator enemyAnime in enemyAnimator)
-                {
-                    enemyAnime.SetTrigger("startDanceAnime");
+    //    }
 
-                }
+    //}
 
-                yield break;
+    //private void StartAllyAttack()
+    //{
+    //    int allyCounter = 3;
 
-            }
+    //    foreach (NavMeshAgent allyAgent in allyNavMesh)
+    //    {
+    //        if (allyCounter % 3 == 0)
+    //        {
+    //            allyAgent.SetDestination(fightingSpot[0].position);
 
-            yield return new WaitForSeconds(UnityEngine.Random.Range(minKillTime, maxKillTime));
+    //        }
+    //        else if (allyCounter % 3 == 1)
+    //        {
+    //            allyAgent.SetDestination(fightingSpot[1].position);
 
-        }
+    //        }
+    //        else if (allyCounter % 3 == 2)
+    //        {
+    //            allyAgent.SetDestination(fightingSpot[2].position);
 
-    }
+    //        }
 
-    private void KillOneUnit()
-    {
-        var randomEnemy = UnityEngine.Random.Range(0, enemyNavMesh.Count);
-        var randomAlly = UnityEngine.Random.Range(0, allyNavMesh.Count);
+    //        allyCounter++;
 
-        Debug.Log("Random enemy num : " + randomEnemy);
-        Debug.Log("Random ally num : " + randomAlly);
+    //    }
 
-        var enemydecal = Instantiate(paintSplashEnemy, enemyNavMesh[randomEnemy].transform.position, Quaternion.identity);
-        Destroy(enemyNavMesh[randomEnemy].gameObject);
-        enemyNavMesh.RemoveAt(randomEnemy);
-        enemyAnimator.RemoveAt(randomEnemy);
-        Debug.Log("Enemy list count : " + enemyNavMesh.Count);
+    //}
 
+    //public void StartEnemyAttack()
+    //{
+    //    foreach (Animator enemyAnime in enemyAnimator)
+    //    {
+    //        enemyAnime.SetTrigger("startRunAnime");
 
-        var allydecal = Instantiate(paintSplashAlly, allyNavMesh[randomAlly].transform.position, Quaternion.identity);
-        Destroy(allyNavMesh[randomAlly].gameObject);
-        allyNavMesh.RemoveAt(randomAlly);
-        allyAnimator.RemoveAt(randomAlly);
-        Debug.Log("Ally list count : " + allyNavMesh.Count);
-    }
+    //    }
 
-    /* public void StartFightingEnemy()
-     {
-         Debug.Log("Entered fighting function");
+    //    int enemyCounter = 3;
 
-         foreach (NavMeshAgent enemyAgent in enemyNavMesh)
-         {
-             Debug.Log("Entered foreach navmesh");
-             enemyAgent.isStopped = true;
+    //    foreach (NavMeshAgent enemyAgent in enemyNavMesh)
+    //    {
+    //        if (enemyCounter % 3 == 0)
+    //        {
+    //            enemyAgent.SetDestination(fightingSpot[0].position);
 
-         }
+    //        }
+    //        else if (enemyCounter % 3 == 1)
+    //        {
+    //            enemyAgent.SetDestination(fightingSpot[1].position);
 
-         foreach (Animator enemyAnime in enemyAnimator)
-         {
-             Debug.Log("Entered foreach animator");
+    //        }
+    //        else if (enemyCounter % 3 == 2)
+    //        {
+    //            enemyAgent.SetDestination(fightingSpot[2].position);
 
-             enemyAnime.SetTrigger("startPunchAnime");
+    //        }
 
-         }
+    //        enemyCounter++;
 
-     } */
+    //    }
 
-    /*public IEnumerator HitSphereSpringLerp()
-    {
-        var endPos = new Vector3(0f, 0.5f, 0f);
-        var startPos = new Vector3(0f, 1.3f, 0f);
+    //}
 
-        var timeSinceStartedSpring = 0.0f;
+    //public IEnumerator StartKillingUnits()
+    //{
+    //    Debug.Log("Start killing units wait...");
 
-        while (true)
-        {
-            timeSinceStartedSpring += Time.deltaTime;
+    //    yield return new WaitForSeconds(waitBeforeKillingTime);
 
-            hitSphereTransform.localPosition = Vector3.MoveTowards(hitSphereTransform.localPosition, endPos, timeSinceStartedSpring * springTime);
+    //    while (true)
+    //    {
+    //        KillOneUnit();
 
-            if (hitSphereTransform.localPosition == endPos)
-            {
-                break;
-            }
+    //        if (enemyNavMesh.Count <= 0)
+    //        {
+    //            Debug.Log("Ally won");
 
-            yield return null;
+    //            foreach (Animator allyAnime in allyAnimator)
+    //            {
+    //                allyAnime.SetTrigger("allyDanceAnime");
 
-        }
+    //            }
 
-        while (true)
-        {
-            timeSinceStartedSpring += Time.deltaTime;
+    //            yield break;
 
-            hitSphereTransform.localPosition = Vector3.MoveTowards(hitSphereTransform.localPosition, startPos, timeSinceStartedSpring * springTime);
+    //        }
 
-            if (hitSphereTransform.localPosition == endPos)
-            {
-                yield break;
-            }
+    //        if (allyNavMesh.Count <= 0)
+    //        {
+    //            Debug.Log("Enemy won");
 
-            yield return null;
+    //            foreach (Animator enemyAnime in enemyAnimator)
+    //            {
+    //                enemyAnime.SetTrigger("startDanceAnime");
 
-        }
+    //            }
 
-    }*/
+    //            yield break;
 
+    //        }
+
+    //        yield return new WaitForSeconds(UnityEngine.Random.Range(minKillTime, maxKillTime));
+
+    //    }
+
+    //}
+
+    //private void KillOneUnit()
+    //{
+    //    var randomEnemy = UnityEngine.Random.Range(0, enemyNavMesh.Count);
+    //    var randomAlly = UnityEngine.Random.Range(0, allyNavMesh.Count);
+
+    //    Debug.Log("Random enemy num : " + randomEnemy);
+    //    Debug.Log("Random ally num : " + randomAlly);
+
+    //    var enemydecal = Instantiate(paintSplashEnemy, enemyNavMesh[randomEnemy].transform.position, Quaternion.identity);
+    //    Destroy(enemyNavMesh[randomEnemy].gameObject);
+    //    enemyNavMesh.RemoveAt(randomEnemy);
+    //    enemyAnimator.RemoveAt(randomEnemy);
+    //    Debug.Log("Enemy list count : " + enemyNavMesh.Count);
+
+
+    //    var allydecal = Instantiate(paintSplashAlly, allyNavMesh[randomAlly].transform.position, Quaternion.identity);
+    //    Destroy(allyNavMesh[randomAlly].gameObject);
+    //    allyNavMesh.RemoveAt(randomAlly);
+    //    allyAnimator.RemoveAt(randomAlly);
+    //    Debug.Log("Ally list count : " + allyNavMesh.Count);
+    //}
+
+    ///* public void StartFightingEnemy()
+    // {
+    //     Debug.Log("Entered fighting function");
+
+    //     foreach (NavMeshAgent enemyAgent in enemyNavMesh)
+    //     {
+    //         Debug.Log("Entered foreach navmesh");
+    //         enemyAgent.isStopped = true;
+
+    //     }
+
+    //     foreach (Animator enemyAnime in enemyAnimator)
+    //     {
+    //         Debug.Log("Entered foreach animator");
+
+    //         enemyAnime.SetTrigger("startPunchAnime");
+
+    //     }
+
+    // } */
+
+    ///*public IEnumerator HitSphereSpringLerp()
+    //{
+    //    var endPos = new Vector3(0f, 0.5f, 0f);
+    //    var startPos = new Vector3(0f, 1.3f, 0f);
+
+    //    var timeSinceStartedSpring = 0.0f;
+
+    //    while (true)
+    //    {
+    //        timeSinceStartedSpring += Time.deltaTime;
+
+    //        hitSphereTransform.localPosition = Vector3.MoveTowards(hitSphereTransform.localPosition, endPos, timeSinceStartedSpring * springTime);
+
+    //        if (hitSphereTransform.localPosition == endPos)
+    //        {
+    //            break;
+    //        }
+
+    //        yield return null;
+
+    //    }
+
+    //    while (true)
+    //    {
+    //        timeSinceStartedSpring += Time.deltaTime;
+
+    //        hitSphereTransform.localPosition = Vector3.MoveTowards(hitSphereTransform.localPosition, startPos, timeSinceStartedSpring * springTime);
+
+    //        if (hitSphereTransform.localPosition == endPos)
+    //        {
+    //            yield break;
+    //        }
+
+    //        yield return null;
+
+    //    }
+
+    //}*/
 }

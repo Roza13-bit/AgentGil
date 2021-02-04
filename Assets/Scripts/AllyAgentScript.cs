@@ -6,39 +6,35 @@ using UnityEngine.AI;
 
 public class AllyAgentScript : MonoBehaviour
 {
-    public float fightingDistance;
 
-    public Transform fightSpot;
 
-    private void Update()
-    {
-        if (transform.GetComponent<NavMeshAgent>().hasPath)
-        {
-            AllyReachedDestination();
+    //[SerializeField] float formationSpeed;
 
-        }
+    //public IEnumerator GuySendToClosestLocation(Vector3 endPos, float numOfGuys)
+    //{
+    //    if (numOfGuys <= 12 && gameObject.activeSelf)
+    //    {
+    //        var timeSinceStarted = 0.0f;
 
-    }
+    //        while (true)
+    //        {
+    //            // Set the position of the instantiated object to the targetPosition.
+    //            // myGuysList[i].transform.localPosition = Vector3.Lerp(myGuysList[i].transform.localPosition, new Vector3(x, y, 0f), timeSinceStarted * formationSpeed);
 
-    private void AllyReachedDestination()
-    {
-        var reached = false;
+    //            transform.localPosition = Vector3.Lerp(transform.localPosition, endPos, timeSinceStarted * formationSpeed);
 
-        if (transform.GetComponent<NavMeshAgent>().remainingDistance <= fightingDistance && !reached)
-        {
-            reached = true;
+    //            timeSinceStarted += Time.deltaTime;
 
-            transform.GetComponent<NavMeshAgent>().isStopped = true;
+    //            if (transform.localPosition == endPos)
+    //            {
+    //                yield break;
+    //            }
 
-            Vector3 DeltaVec = (fightSpot.position - transform.position);
-            DeltaVec.y = 0.0f;
+    //            yield return null;
 
-            transform.rotation = Quaternion.LookRotation(DeltaVec);
+    //        }
 
-            transform.GetComponent<Animator>().SetTrigger("allyPunchAnime");
+    //    }
 
-        }
-
-    }
-
+    //}
 }

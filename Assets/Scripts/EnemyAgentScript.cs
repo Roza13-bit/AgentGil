@@ -6,39 +6,40 @@ using UnityEngine.AI;
 
 public class EnemyAgentScript : MonoBehaviour
 {
-    public float fightingDistanceEnemy;
 
-    public Transform fightSpot;
 
-    private void Update()
-    {
-        if (transform.GetComponent<NavMeshAgent>().hasPath)
-        {
-            EnemyReachedDestination();
+    //public float fightingDistanceEnemy;
 
-        }
+    //public Transform fightSpot;
 
-    }
+    //private void Update()
+    //{
+    //    if (transform.GetComponent<NavMeshAgent>().hasPath)
+    //    {
+    //        EnemyReachedDestination();
 
-    private void EnemyReachedDestination()
-    {
-        var reached = false;
+    //    }
 
-        if (transform.GetComponent<NavMeshAgent>().remainingDistance <= fightingDistanceEnemy && !reached)
-        {
-            reached = true;
+    //}
 
-            transform.GetComponent<NavMeshAgent>().isStopped = true;
+    //private void EnemyReachedDestination()
+    //{
+    //    var reached = false;
 
-            Vector3 DeltaVec = (fightSpot.position - transform.position);
-            DeltaVec.y = 0.0f;
+    //    if (transform.GetComponent<NavMeshAgent>().remainingDistance <= fightingDistanceEnemy && !reached)
+    //    {
+    //        reached = true;
 
-            transform.rotation = Quaternion.LookRotation(DeltaVec);
+    //        transform.GetComponent<NavMeshAgent>().isStopped = true;
 
-            transform.GetComponent<Animator>().SetTrigger("startPunchAnime");
+    //        Vector3 DeltaVec = (fightSpot.position - transform.position);
+    //        DeltaVec.y = 0.0f;
 
-        }
+    //        transform.rotation = Quaternion.LookRotation(DeltaVec);
 
-    }
+    //        transform.GetComponent<Animator>().SetTrigger("startPunchAnime");
 
+    //    }
+
+    //}
 }

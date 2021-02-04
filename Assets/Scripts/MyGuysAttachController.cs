@@ -4,27 +4,40 @@ using UnityEngine;
 
 public class MyGuysAttachController : MonoBehaviour
 {
-    [Header("Cached References")]
-    public CenterGuysSphereScript cgsSC;
-    public Transform instanceCenterSphere;
+    //[Header("Cached References")]
+    //public CenterGuysSphereScript cgsSC;
+    //public Transform instanceCenterSphere;
 
-    //  [Header("Local Variables")]
+    ////  [Header("Local Variables")]
+    [SerializeField] CenterGuysSphereScript cgsSC;
+
+    private bool hasCollidedAttach = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        gameObject.GetComponent<Collider>().enabled = false;
+        Debug.Log("Attach Trigger");
 
-        if (other.CompareTag("MyGuy"))
+        if (!hasCollidedAttach)
         {
-            cgsSC.numberOfGuys++;
-            Debug.Log("number of guys " + cgsSC.numberOfGuys);
+            hasCollidedAttach = true;
+            cgsSC.GuyPickupSequance();
 
-            cgsSC.InitFormation(other.gameObject);
-
-            Destroy(this.gameObject);
+            Destroy(gameObject);
 
         }
 
+        //gameObject.GetComponent<Collider>().enabled = false;
+
+        //if (other.CompareTag("MyGuy"))
+        //{
+        //    cgsSC.numberOfGuys++;
+        //    Debug.Log("number of guys " + cgsSC.numberOfGuys);
+
+        //    cgsSC.InitFormation();
+
+        //    Destroy(this.gameObject);
+
+        //}
     }
 
 }

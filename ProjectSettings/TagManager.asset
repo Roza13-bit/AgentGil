@@ -8,6 +8,8 @@ TagManager:
   - Obstacle
   - Enemy
   - HitStand
+  - Diamond
+  - Gold
   layers:
   - Default
   - TransparentFX

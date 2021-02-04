@@ -45,24 +45,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyGuyPrefab: {fileID: 4102719792828103743, guid: d52b987ffeed79644b4f3923e5c55917,
     type: 3}
-  CenterSphere: {fileID: 0}
-  mgdmSC: {fileID: -7493060158447205759, guid: d52b987ffeed79644b4f3923e5c55917, type: 3}
-  smokeHolderGO: {fileID: 0}
+  myGuyCenterSC: {fileID: 47398081277362584, guid: 91d7729df812da44d89369a76c7e1fc1,
+    type: 3}
+  CenterSphere: {fileID: 47398081277362591, guid: 91d7729df812da44d89369a76c7e1fc1,
+    type: 3}
+  emptyHolderGO: {fileID: 6819977944897239186, guid: 3381785730fca5643822416a1774031a,
+    type: 3}
   myGuysList: []
   numberOfGuys: 1
   sizeMultiply: 0
   radius: 9
   sphereXRotation: 30
+  xSquareOffset: 0
+  ySquareOffset: 0
+  rowOffsetTri: 0
+  yOffsetTri: 0
+  xOffsetTri: 0
+  xOffsetLine: 0
   waitForCombineFloat: 2
-  xRotMyGuys: 30
-  yRotMyGuys: 45
-  zRotMyGuys: 9
-  lerpTime: 0.2
-  moveMyGuysTime: 0.02
-  timeForRotateAndCombine: 4
-  myGuyBurningMaterialsArray:
-  - {fileID: 2100000, guid: a7bd79b3d30b3b44fa9100fcf56eb375, type: 2}
-  - {fileID: 2100000, guid: e17400e352dcbf240961c4869493dd11, type: 2}
-  - {fileID: 2100000, guid: d514a44a7f0cb98429e1e164fb2781e3, type: 2}
-  - {fileID: 2100000, guid: e44820f7693f7b04085e2e52580f9ded, type: 2}
-  changeSpeed: 0.8
+  rotationSpeedMyGuy: 0
+  rotationSpeedSphere: 0
+  formationSpeed: 0

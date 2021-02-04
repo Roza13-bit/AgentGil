@@ -2,43 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BirdControllerScript : MonoBehaviour
+public class CollactibleScript : MonoBehaviour
 {
-    public CenterGuysSphereScript cgsSC;
-    public Transform instanceCenterSphere;
-    public Material greyMat;
+    [SerializeField] CanvasController canvasControlSC;
 
-    private bool hasCollidedObject = false;
+    private bool collectedGO = false;
 
     private void OnTriggerEnter(Collider other)
     {
-            MyGuyDeathSequance(other);
+        if (this.gameObject.CompareTag("Gold") && !collectedGO)
+        {
+            collectedGO = true;
 
-            Debug.Log("TRIGER");
+            canvasControlSC.goldGained++;
 
-            Debug.Log("Object name : " + other.name + "Object Pos : " + other.transform.position);
+            Destroy(this.gameObject);
 
-            StartCoroutine(WaitBeforeRemoving(other));
+        }
+        else if (this.gameObject.CompareTag("Diamond") && !collectedGO)
+        {
+            collectedGO = true;
 
-    }
+            canvasControlSC.diamondsGained++;
 
-    private IEnumerator WaitBeforeRemoving(Collider other)
-    {
-        var numOfGuysReduced = cgsSC.numberOfGuys;
+            Destroy(this.gameObject);
 
-        cgsSC.numberOfGuys--;
-
-        Debug.Log("number of guys " + cgsSC.numberOfGuys);
-
-        cgsSC.InitFormation(other.gameObject);
-
-        yield return null;
-
-    }
-
-    private void MyGuyDeathSequance(Collider other)
-    {
-        this.gameObject.GetComponent<Collider>().enabled = false;
+        }
 
     }
 

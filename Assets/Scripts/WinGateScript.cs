@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class WinGateScript : MonoBehaviour
 {
-    public CenterGuysSphereScript cgsSC;
+    [Header ("Serialized References")]
 
-    public bool isLandingStarted = false;
+    [SerializeField] CenterGuysSphereScript cgsSC;
+
+    [SerializeField] MyGuyCenterController myGuyccSC;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isLandingStarted)
-        {
-            isLandingStarted = true;
+        cgsSC.GuyLandingSequance();
 
-            StartCoroutine(cgsSC.StartSphereRotation());
-            cgsSC.StartMyGuyRotation();
+        myGuyccSC.RotateSphereToZero();
 
-        }
-        
     }
 
 }
