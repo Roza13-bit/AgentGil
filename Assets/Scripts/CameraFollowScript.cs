@@ -7,8 +7,11 @@ public class CameraFollowScript : MonoBehaviour
 {
     [Header("Cached References")]
     public MyGuyCenterController myGuyCenterC;
+
     public PointMeterScript pointMeterSC;
+
     public WinGateScript winGateSC;
+
     public Transform myGuyTransform;
 
     [Header("Follow Range Game Time")]

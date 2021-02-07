@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class MyGuysAttachController : MonoBehaviour
 {
-    //[Header("Cached References")]
-    //public CenterGuysSphereScript cgsSC;
-    //public Transform instanceCenterSphere;
-
-    ////  [Header("Local Variables")]
     [SerializeField] CenterGuysSphereScript cgsSC;
 
     private bool hasCollidedAttach = false;
@@ -26,18 +21,6 @@ public class MyGuysAttachController : MonoBehaviour
 
         }
 
-        //gameObject.GetComponent<Collider>().enabled = false;
-
-        //if (other.CompareTag("MyGuy"))
-        //{
-        //    cgsSC.numberOfGuys++;
-        //    Debug.Log("number of guys " + cgsSC.numberOfGuys);
-
-        //    cgsSC.InitFormation();
-
-        //    Destroy(this.gameObject);
-
-        //}
     }
 
 }

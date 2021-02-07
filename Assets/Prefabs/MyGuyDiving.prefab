@@ -448,7 +448,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0fa6cad9f5f94408ce7163229705cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  formationSpeed: 0.2
 --- !u!95 &3613203245728325980
 Animator:
   serializedVersion: 3
@@ -879,11 +878,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MyGuy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1935543245737454108, guid: 6603dcbc955e5ff4bb09046d6e047e45,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4531621813707152163, guid: 6603dcbc955e5ff4bb09046d6e047e45,
         type: 3}

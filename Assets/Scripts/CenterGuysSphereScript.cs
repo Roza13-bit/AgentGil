@@ -36,6 +36,8 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     [SerializeField] float fallSpeedLanding;
 
+    [SerializeField] float waitBeforeParachuteOpen;
+
     private Quaternion guyLandingQuat;
 
     private Quaternion sphereLandingQuat;
@@ -66,12 +68,6 @@ public class CenterGuysSphereScript : MonoBehaviour
 
         formationRotSpeed = 0.0f;
 
-        foreach (GameObject item in guysParachute)
-        {
-            item.SetActive(true);
-
-        }
-
         foreach (GameObject guy in activeGuys)
         {
             StartCoroutine(LerpGuysForLanding(guy));
@@ -94,11 +90,19 @@ public class CenterGuysSphereScript : MonoBehaviour
 
             if (guy.transform.localRotation == guyLandingQuat && transform.localRotation == sphereLandingQuat)
             {
-                yield break;
+                break;
 
             }
 
             yield return null;
+
+        }
+
+        yield return new WaitForSeconds(waitBeforeParachuteOpen);
+
+        foreach (GameObject item in guysParachute)
+        {
+            item.SetActive(true);
 
         }
 
@@ -125,6 +129,20 @@ public class CenterGuysSphereScript : MonoBehaviour
         }
 
         MoveGuysToPositions();
+
+    }
+
+    public void GuyRemoveSequance()
+    {
+        Debug.Log("Active Guys Length : " + activeGuys.Count);
+
+        activeGuys[activeGuys.Count - 1].SetActive(false);
+
+        Debug.Log("Active Guys Length : " + activeGuys.Count);
+
+        activeGuys.RemoveAt(activeGuys.Count - 1);
+
+        Debug.Log("Active Guys Length : " + activeGuys.Count);
 
     }
 
