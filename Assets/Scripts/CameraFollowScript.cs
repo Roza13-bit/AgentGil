@@ -6,6 +6,8 @@ using UnityEngine;
 public class CameraFollowScript : MonoBehaviour
 {
     [Header("Cached References")]
+    public CenterGuysSphereScript cgsSC;
+
     public MyGuyCenterController myGuyCenterC;
 
     public PointMeterScript pointMeterSC;
@@ -21,6 +23,8 @@ public class CameraFollowScript : MonoBehaviour
 
     [Header("Camera End Positions")]
     public bool isLanded = false;
+
+    public bool isWinGate = false;
 
     public float cameraEndY;
 
@@ -44,13 +48,13 @@ public class CameraFollowScript : MonoBehaviour
 
     private void Start()
     {
-        endPos = new Vector3(17.4f, cameraEndY, cameraEndZ);
+        endPos = new Vector3(42.2f, cameraEndY, cameraEndZ);
 
-        endRot.eulerAngles = new Vector3(10f, -18.2f, 0f);
+        endRot.eulerAngles = new Vector3(5.31f, -18.2f, 0f);
 
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (!isLanded && !flag)
         {
@@ -65,9 +69,13 @@ public class CameraFollowScript : MonoBehaviour
         }
         else if (isLanded && !flag)
         {
-            flag = true;
+            // flag = true;
 
             StartCoroutine(LerpCameraToEndPos());
+
+            StartCoroutine(LerpCameraToEndRot());
+
+            StartCoroutine(LerpCameraToEndFOV());
 
         }
 
@@ -75,24 +83,34 @@ public class CameraFollowScript : MonoBehaviour
 
     private IEnumerator LerpCameraToEndPos()
     {
-        var timeSinceStartedMovement = 0.0f;
+        transform.position = Vector3.MoveTowards(transform.position, endPos, 1 * cameraMoveEndSpeed);
 
-        while (true)
+        if (transform.position == endPos)
         {
-            timeSinceStartedMovement += Time.deltaTime;
+            yield break;
 
-            gameObject.GetComponent<Camera>().fieldOfView = Mathf.Lerp(gameObject.GetComponent<Camera>().fieldOfView, endFOV, timeSinceStartedMovement * FOVSpeed);
+        }
 
-            transform.position = Vector3.MoveTowards(transform.position, endPos, timeSinceStartedMovement * cameraMoveEndSpeed);
+    }
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, endRot, timeSinceStartedMovement * cameraRotEndSpeed);
+    private IEnumerator LerpCameraToEndRot()
+    {
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, endRot, 1 * cameraRotEndSpeed);
 
-            if (gameObject.GetComponent<Camera>().fieldOfView == endFOV && transform.position == endPos && transform.rotation == endRot)
-            {
-                yield break;
-            }
+        if (transform.rotation == endRot)
+        {
+            yield break;
+        }
 
-            yield return null;
+    }
+
+    private IEnumerator LerpCameraToEndFOV()
+    {
+        gameObject.GetComponent<Camera>().fieldOfView = Mathf.Lerp(gameObject.GetComponent<Camera>().fieldOfView, endFOV, 1 * FOVSpeed);
+
+        if (gameObject.GetComponent<Camera>().fieldOfView == endFOV)
+        {
+            yield break;
 
         }
 

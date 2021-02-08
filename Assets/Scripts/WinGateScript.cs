@@ -10,11 +10,15 @@ public class WinGateScript : MonoBehaviour
 
     [SerializeField] MyGuyCenterController myGuyccSC;
 
+    [SerializeField] CameraFollowScript cameraSC;
+
     private void OnTriggerEnter(Collider other)
     {
         cgsSC.GuyLandingSequance();
 
         myGuyccSC.RotateSphereToZero();
+
+        cameraSC.isLanded = true;
 
     }
 

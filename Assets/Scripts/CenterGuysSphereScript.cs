@@ -12,7 +12,7 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     [SerializeField] GameObject[] myGuysArray = new GameObject[12];
 
-    [SerializeField] List<GameObject> activeGuys = new List<GameObject>();
+    public List<GameObject> activeGuys = new List<GameObject>();
 
     [SerializeField] List<Transform> guysTransform = new List<Transform>();
 

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: FS000_Day_02_Sunless
   m_Shader: {fileID: 4800000, guid: 82881a2d011b0964696411c822cdd00b, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _ENABLEROTATION_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -28,13 +28,13 @@ Material:
     - _CubemapPosition: 0
     - _Cubemapp: 1
     - _EnableFog: 0
-    - _EnableRotation: 0
+    - _EnableRotation: 1
     - _Exposure: 1
-    - _FogFill: 0.5
+    - _FogFill: 0.771
     - _FogHeight: 1
     - _FogIntensity: 1
     - _FogMessage: 0
-    - _FogPosition: 0
+    - _FogPosition: -0.45
     - _FogSmoothness: 0.01
     - _Fogg: 1
     - _IsStandardPipeline: 1

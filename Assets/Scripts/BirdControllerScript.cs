@@ -10,16 +10,7 @@ public class CollactibleScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (this.gameObject.CompareTag("Gold") && !collectedGO)
-        {
-            collectedGO = true;
-
-            canvasControlSC.goldGained++;
-
-            Destroy(this.gameObject);
-
-        }
-        else if (this.gameObject.CompareTag("Diamond") && !collectedGO)
+        if (this.gameObject.CompareTag("Diamond") && !collectedGO)
         {
             collectedGO = true;
 
