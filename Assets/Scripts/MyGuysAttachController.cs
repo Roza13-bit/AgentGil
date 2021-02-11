@@ -12,6 +12,8 @@ public class MyGuysAttachController : MonoBehaviour
     {
         Debug.Log("Attach Trigger");
 
+        // attachParticlesArray.Play();
+
         if (!hasCollidedAttach)
         {
             hasCollidedAttach = true;
