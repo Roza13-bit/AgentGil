@@ -6,6 +6,8 @@ public class MyGuysAttachController : MonoBehaviour
 {
     [SerializeField] CenterGuysSphereScript cgsSC;
 
+    [SerializeField] CanvasController canvasControl;
+
     private bool hasCollidedAttach = false;
 
     private void OnTriggerEnter(Collider other)
@@ -17,6 +19,11 @@ public class MyGuysAttachController : MonoBehaviour
         if (!hasCollidedAttach)
         {
             hasCollidedAttach = true;
+
+            canvasControl.NiceTextStartSequance();
+
+            Debug.Log("called nice text pop");
+
             cgsSC.GuyPickupSequance();
 
             Destroy(gameObject);
