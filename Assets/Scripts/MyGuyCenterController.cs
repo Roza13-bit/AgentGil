@@ -11,6 +11,8 @@ public class MyGuyCenterController : MonoBehaviour
 
     [SerializeField] MyGuysAttachController myGuyAttach;
 
+    [SerializeField] AllyAgentScript allyAgentSC;
+
     [Header("Movement Controlls")]
 
     public float turnSpeed = 10f;
@@ -22,6 +24,10 @@ public class MyGuyCenterController : MonoBehaviour
     public float sphereLandingSpeed;
 
     public float myGuyBorder;
+
+    public float rotDiverSpeed = 10f;
+
+    public Vector3 direction;
 
     private Quaternion endSphereRot;
 
@@ -36,7 +42,9 @@ public class MyGuyCenterController : MonoBehaviour
 
         Vector3 forwardVector = transform.forward * glideSpeed;
 
-        Vector3 direction = Vector3.right * variableJoystick.Horizontal * turnSpeed;
+        direction = Vector3.right * variableJoystick.Horizontal * turnSpeed;
+
+        // Debug.Log("Direction: " + direction);
 
         Vector3 viewPos = transform.position;
 

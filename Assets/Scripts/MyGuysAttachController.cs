@@ -8,17 +8,21 @@ public class MyGuysAttachController : MonoBehaviour
 
     [SerializeField] CanvasController canvasControl;
 
+    [SerializeField] CameraShake cameraShakeSC;
+
     private bool hasCollidedAttach = false;
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Attach Trigger");
 
-        // attachParticlesArray.Play();
-
         if (!hasCollidedAttach)
         {
             hasCollidedAttach = true;
+
+            // gameObject.GetComponentInChildren<ParticleSystem>().Play();
+
+            // StartCoroutine(cameraShakeSC.CameraShakeCR(.8f, 15f));
 
             canvasControl.NiceTextStartSequance();
 

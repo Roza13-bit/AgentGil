@@ -6,35 +6,30 @@ using UnityEngine.AI;
 
 public class AllyAgentScript : MonoBehaviour
 {
+    public MyGuyCenterController myGuyccSC;
 
+    public float tiltLevel;
 
-    //[SerializeField] float formationSpeed;
+    private Quaternion newRot;
 
-    //public IEnumerator GuySendToClosestLocation(Vector3 endPos, float numOfGuys)
-    //{
-    //    if (numOfGuys <= 12 && gameObject.activeSelf)
-    //    {
-    //        var timeSinceStarted = 0.0f;
+    private void Start()
+    {
+        newRot.eulerAngles = Vector3.zero;
 
-    //        while (true)
-    //        {
-    //            // Set the position of the instantiated object to the targetPosition.
-    //            // myGuysList[i].transform.localPosition = Vector3.Lerp(myGuysList[i].transform.localPosition, new Vector3(x, y, 0f), timeSinceStarted * formationSpeed);
+    }
 
-    //            transform.localPosition = Vector3.Lerp(transform.localPosition, endPos, timeSinceStarted * formationSpeed);
+    private void FixedUpdate()
+    {
+        RotateDiverOnMove(myGuyccSC.direction.x);
 
-    //            timeSinceStarted += Time.deltaTime;
+    }
 
-    //            if (transform.localPosition == endPos)
-    //            {
-    //                yield break;
-    //            }
+    public void RotateDiverOnMove(float tilt)
+    {
+        newRot.eulerAngles = new Vector3(0f, 0f, tilt * tiltLevel);
 
-    //            yield return null;
+        transform.localRotation = Quaternion.Lerp(transform.localRotation, newRot, 1);
 
-    //        }
+    }
 
-    //    }
-
-    //}
 }

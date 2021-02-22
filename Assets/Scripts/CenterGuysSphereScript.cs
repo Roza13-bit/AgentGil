@@ -18,6 +18,8 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     public List<GameObject> guysParachute = new List<GameObject>();
 
+    [SerializeField] GameObject centerSphereGO;
+
     [Header("Speed Controls")]
 
     [SerializeField] float gameTime;
@@ -40,6 +42,8 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     private Quaternion guyLandingQuat;
 
+    private Quaternion newRot;
+
     private Quaternion sphereLandingQuat;
 
     private void Start()
@@ -48,13 +52,15 @@ public class CenterGuysSphereScript : MonoBehaviour
 
         activeGuys.Insert(0, myGuysArray[0]);
 
-        guyLandingQuat.eulerAngles = new Vector3(15f, 0f, 0f);
+        guyLandingQuat.eulerAngles = new Vector3(0f, 0f, 0f);
 
         sphereLandingQuat.eulerAngles = new Vector3(0f, 0f, 0f);
 
+        newRot.eulerAngles = Vector3.zero;
+
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.Rotate(Vector3.up, formationRotSpeed * Time.deltaTime);
 
@@ -84,11 +90,11 @@ public class CenterGuysSphereScript : MonoBehaviour
         {
             timeSinceStartedLandingSequance += Time.deltaTime;
 
-            guy.transform.localRotation = Quaternion.RotateTowards(guy.transform.localRotation, guyLandingQuat, timeSinceStartedLandingSequance * landRotSpeed * 20f);
+            guy.transform.localRotation = Quaternion.RotateTowards(guy.transform.localRotation, guyLandingQuat, timeSinceStartedLandingSequance * landRotSpeed * 10f);
 
             transform.localRotation = Quaternion.RotateTowards(transform.localRotation, sphereLandingQuat, timeSinceStartedLandingSequance * landRotSpeed * 2);
 
-            if (guy.transform.localRotation == guyLandingQuat && transform.localRotation == sphereLandingQuat)
+            if (transform.localRotation == sphereLandingQuat && guy.transform.localRotation == guyLandingQuat)
             {
                 break;
 
@@ -98,11 +104,19 @@ public class CenterGuysSphereScript : MonoBehaviour
 
         }
 
+        Debug.Log("Reached animator call");
+
+        guy.GetComponentInChildren<Animator>().SetTrigger("parachuteOpenTrigger");
+
         yield return new WaitForSeconds(waitBeforeParachuteOpen);
 
         foreach (GameObject item in guysParachute)
         {
+            item.transform.localPosition = new Vector3(0f, 6.6f, 2.3f);
+
             item.SetActive(true);
+
+            item.GetComponent<Animator>().SetTrigger("openParachute");
 
         }
 

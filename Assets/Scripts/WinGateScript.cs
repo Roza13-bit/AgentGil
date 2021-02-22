@@ -14,11 +14,16 @@ public class WinGateScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        cgsSC.GuyLandingSequance();
+        Debug.Log("WinGate");
 
-        myGuyccSC.RotateSphereToZero();
+        if (other.CompareTag("MyGuy"))
+        {
+            cgsSC.GuyLandingSequance();
 
-        cameraSC.isLanded = true;
+            myGuyccSC.RotateSphereToZero();
+
+            cameraSC.isLanded = true;
+        }
 
     }
 
