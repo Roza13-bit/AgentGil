@@ -51,7 +51,7 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 1
-    m_EnableBakedLightmaps: 0
+    m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
@@ -936,6 +936,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5959713503578147278}
     m_Modifications:
+    - target: {fileID: 62, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
+      propertyPath: axisOptions
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1044,22 +1048,42 @@ PrefabInstance:
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043268, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8170153791668043269, guid: 0d230cc8be529a542a08cb878ab14b18,
         type: 3}
       propertyPath: m_Name
       value: Floating Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153791961219456, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153791961219456, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263258, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8170153792821263258, guid: 0d230cc8be529a542a08cb878ab14b18,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d230cc8be529a542a08cb878ab14b18, type: 3}
@@ -6756,7 +6780,7 @@ PrefabInstance:
     - target: {fileID: 4494195845498516813, guid: db9a3d59b78351f438ff4be6364ccf17,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4288
+      value: -15763
       objectReference: {fileID: 0}
     - target: {fileID: 4494195845498516813, guid: db9a3d59b78351f438ff4be6364ccf17,
         type: 3}
@@ -6766,7 +6790,7 @@ PrefabInstance:
     - target: {fileID: 4494195845498516813, guid: db9a3d59b78351f438ff4be6364ccf17,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1014
+      value: 3662
       objectReference: {fileID: 0}
     - target: {fileID: 4494195845498516813, guid: db9a3d59b78351f438ff4be6364ccf17,
         type: 3}
@@ -65644,6 +65668,11 @@ PrefabInstance:
       propertyPath: m_CameraType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 872913250560176588, guid: 7ed3f9ba807851943b5e4bb420439d0b,
+        type: 3}
+      propertyPath: m_Antialiasing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 872913250560176589, guid: 7ed3f9ba807851943b5e4bb420439d0b,
         type: 3}
       propertyPath: m_Name
@@ -67086,6 +67115,11 @@ PrefabInstance:
       propertyPath: waitForNicePopup
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 4247708259059879469, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4247708259059879470, guid: 164ead9fc1773ed44bfb92fb3c27e625,
         type: 3}
       propertyPath: m_Name
@@ -67100,6 +67134,61 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 439.1982
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260730867420, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -87.54199
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260730867420, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 326.3904
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260730867420, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 71.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260730867420, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 250.30243
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260791303652, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 271.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260791303652, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 245.40671
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260791303652, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -87.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260791303652, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 156.75952
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260791303653, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_text
+      value: ': 00'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260791303653, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 4247708260791303653, guid: 164ead9fc1773ed44bfb92fb3c27e625,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 120
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 164ead9fc1773ed44bfb92fb3c27e625, type: 3}
@@ -67606,11 +67695,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -67626,9 +67715,9 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1289663836}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
