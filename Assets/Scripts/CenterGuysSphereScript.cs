@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class CenterGuysSphereScript : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class CenterGuysSphereScript : MonoBehaviour
     public List<GameObject> guysParachute = new List<GameObject>();
 
     [SerializeField] GameObject centerSphereGO;
+
+    [SerializeField] GameObject losePopup;
 
     [Header("Speed Controls")]
 
@@ -70,7 +73,7 @@ public class CenterGuysSphereScript : MonoBehaviour
     {
         myGuyccSC.glideSpeed = glideSpeedLanding;
 
-        myGuyccSC.fallSpeed = fallSpeedLanding;
+        myGuyccSC.fallSpeed = fallSpeedLanding * 1.5f;
 
         formationRotSpeed = 0.0f;
 
@@ -157,6 +160,26 @@ public class CenterGuysSphereScript : MonoBehaviour
         activeGuys.RemoveAt(activeGuys.Count - 1);
 
         Debug.Log("Active Guys Length : " + activeGuys.Count);
+
+        if (activeGuys.Count == 0)
+        {
+            losePopup.SetActive(true);
+
+            // GameLostCoroutine();
+
+        }
+
+    }
+
+    public void OnClickRetryButton()
+    {
+        SceneManager.LoadScene(0);
+
+    }
+
+    private void GameLostCoroutine()
+    {
+        Time.timeScale = 0.1f;
 
     }
 
@@ -884,4 +907,5 @@ public class CenterGuysSphereScript : MonoBehaviour
     //    }
 
     //}
+
 }

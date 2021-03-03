@@ -5,6 +5,7 @@ using UnityEngine.Experimental.VFX;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
+using TMPro;
 
 public class PointMeterScript : MonoBehaviour
 {
@@ -16,9 +17,17 @@ public class PointMeterScript : MonoBehaviour
 
     [SerializeField] CameraFollowScript cameraSC;
 
+    [SerializeField] CanvasController canvasControlSC;
+
+    [SerializeField] GameObject winPopup;
+
+    [SerializeField] TextMeshProUGUI diamondFinal;
+
     [SerializeField] ParticleSystem[] confettiArray = new ParticleSystem[4];
 
     [SerializeField] VisualEffect[] fireworksArray = new VisualEffect[2];
+
+    [SerializeField] float waitAtEnd;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -45,6 +54,18 @@ public class PointMeterScript : MonoBehaviour
             fire.Play();
 
         }
+
+        StartCoroutine(OpenWinPopup());
+
+    }
+
+    private IEnumerator OpenWinPopup()
+    {
+        yield return new WaitForSeconds(waitAtEnd);
+
+        diamondFinal.text = "X " + canvasControlSC.diamondsGained;
+
+        winPopup.SetActive(true);
 
     }
 

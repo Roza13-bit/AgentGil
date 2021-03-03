@@ -46,9 +46,11 @@ public class MyGuyCenterController : MonoBehaviour
 
         // Debug.Log("Direction: " + direction);
 
-        Vector3 viewPos = transform.position;
+        Vector3 viewPos = transform.localPosition;
 
         viewPos.x = Mathf.Clamp(viewPos.x, -myGuyBorder, myGuyBorder);
+
+        transform.position = viewPos;
 
         transform.Translate(direction + downVector + forwardVector * Time.fixedDeltaTime);
 

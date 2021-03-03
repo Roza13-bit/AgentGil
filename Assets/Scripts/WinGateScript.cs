@@ -23,6 +23,7 @@ public class WinGateScript : MonoBehaviour
             myGuyccSC.RotateSphereToZero();
 
             cameraSC.isLanded = true;
+
         }
 
     }

@@ -28,7 +28,7 @@ public class CanvasController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        diamondTXT.text = ":" + diamondsGained;
+        diamondTXT.text = " " + diamondsGained;
         
     }
 
