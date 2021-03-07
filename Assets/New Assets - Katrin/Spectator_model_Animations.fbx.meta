@@ -12,7 +12,22 @@ ModelImporter:
   - first:
       74: -6959761996762668699
     second: FastClap
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pants
+    second: {fileID: 2100000, guid: 61713e2ba5ab8794da00f9cec66be342, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shirt_Shoes
+    second: {fileID: 2100000, guid: 81247d597cb1804489116184dc153c95, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SkinTone
+    second: {fileID: 2100000, guid: fcc2e1a997714414691ce3a710a2d7fe, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
