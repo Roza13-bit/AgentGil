@@ -19,24 +19,78 @@ public class PointMeterScript : MonoBehaviour
 
     [SerializeField] CanvasController canvasControlSC;
 
+    [SerializeField] Rigidbody centerSphereRB;
+
     [SerializeField] GameObject winPopup;
 
     [SerializeField] TextMeshProUGUI diamondFinal;
 
+    [SerializeField] TextMeshProUGUI diamondFinal1;
+
     [SerializeField] ParticleSystem[] confettiArray = new ParticleSystem[4];
 
-    [SerializeField] VisualEffect[] fireworksArray = new VisualEffect[2];
+    [SerializeField] VisualEffect[] fireworksArray = new VisualEffect[4];
 
     [SerializeField] float waitAtEnd;
 
+    [SerializeField] float buttonSpeed;
+
+    private Vector3 buttonEndPos;
+
+    private void Start()
+    {
+        buttonEndPos = new Vector3(0f, -40f, 0f);
+
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        myGuyccSC.fallSpeed = 0;
+        Debug.Log("other : " + other.name);
 
-        myGuyccSC.glideSpeed = 0;
+        if (other.CompareTag("MyGuy"))
+        {
+            Debug.Log("Point meter collision");
 
-        // cameraSC.isLanded = true;
+            myGuyccSC.fallSpeed = 0;
 
+            myGuyccSC.glideSpeed = 0;
+
+            centerSphereRB.isKinematic = false;
+
+            // cameraSC.isLanded = true;
+
+            StartCoroutine(StartButtonClickLerp());
+
+        }
+
+    }
+
+    private IEnumerator StartButtonClickLerp()
+    {
+        var timeSinceStartedPress = 0.0f;
+
+        while (true)
+        {
+            transform.localPosition = Vector3.Lerp(transform.localPosition, buttonEndPos, timeSinceStartedPress * buttonSpeed);
+
+            timeSinceStartedPress += Time.deltaTime;
+
+            if (transform.localPosition == buttonEndPos)
+            {
+                break;
+
+            }
+
+            yield return null;
+
+        }
+
+        PointMeterClick();
+
+    }
+
+    private void PointMeterClick()
+    {
         foreach (GameObject item in cgsSC.guysParachute)
         {
             item.SetActive(false);
@@ -56,7 +110,6 @@ public class PointMeterScript : MonoBehaviour
         }
 
         StartCoroutine(OpenWinPopup());
-
     }
 
     private IEnumerator OpenWinPopup()
@@ -64,6 +117,8 @@ public class PointMeterScript : MonoBehaviour
         yield return new WaitForSeconds(waitAtEnd);
 
         diamondFinal.text = "X " + canvasControlSC.diamondsGained;
+
+        diamondFinal1.text = "X " + canvasControlSC.diamondsGained;
 
         winPopup.SetActive(true);
 

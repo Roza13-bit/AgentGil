@@ -8,6 +8,8 @@ public class CanvasController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI diamondTXT;
 
+    [SerializeField] TextMeshProUGUI diamondTXT1;
+
     [SerializeField] GameObject niceTMP;
 
     [SerializeField] Animator niceTmpAnimator;
@@ -28,8 +30,10 @@ public class CanvasController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        diamondTXT.text = " " + diamondsGained;
-        
+        diamondTXT.text = "" + diamondsGained;
+
+        diamondTXT1.text = "" + diamondsGained;
+
     }
 
     public void NiceTextStartSequance()
@@ -57,7 +61,7 @@ public class CanvasController : MonoBehaviour
                 break;
             case 3:
 
-                tmpText = "Awsome!";
+                tmpText = "Awesome!";
 
                 break;
 

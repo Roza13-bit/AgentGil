@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2016981453654675080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.971136, y: 9245.275, z: -2333.4285}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -42,7 +42,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016981453654675080}
-  m_Mesh: {fileID: 2401994324257950250, guid: 70cd9f3e8ff83274d9e96df2ee09a578, type: 3}
+  m_Mesh: {fileID: -6625630691567173866, guid: 6bcd3f8ab4440e84f9d67d48d0bb6e79, type: 3}
 --- !u!23 &6170751674841912867
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f217fc8ee8d3a041920b55efce6c96c, type: 2}
+  - {fileID: 2100000, guid: 126373fabc82add4aa27d8d5a8d38e4f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasControlSC: {fileID: 0}
+  rotationCoinSpeed: 1
 --- !u!65 &5730906833465090690
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,7 +107,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.8705058, y: 2.6614585, z: 2.6764324}
+  m_Size: {x: 9, y: 9, z: 2.6764324}
   m_Center: {x: 0.052590054, y: 0.39843744, z: 0.05745443}
 --- !u!114 &88609668
 MonoBehaviour:

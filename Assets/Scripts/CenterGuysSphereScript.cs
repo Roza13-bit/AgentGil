@@ -119,7 +119,11 @@ public class CenterGuysSphereScript : MonoBehaviour
 
             item.SetActive(true);
 
-            item.GetComponent<Animator>().SetTrigger("openParachute");
+            if (item.GetComponent<Animator>().isActiveAndEnabled)
+            {
+                item.GetComponent<Animator>().SetTrigger("openParachute");
+
+            }
 
         }
 

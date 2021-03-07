@@ -6,7 +6,15 @@ public class CollactibleScript : MonoBehaviour
 {
     [SerializeField] CanvasController canvasControlSC;
 
+    [SerializeField] float rotationCoinSpeed;
+
     private bool collectedGO = false;
+
+    private void FixedUpdate()
+    {
+        transform.Rotate(Vector3.up, rotationCoinSpeed * Time.fixedDeltaTime);
+
+    }
 
     private void OnTriggerEnter(Collider other)
     {

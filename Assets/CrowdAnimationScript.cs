@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CrowdAnimationScript : MonoBehaviour
 {
-    [SerializeField] Transform crowdGO;
-
     private Animator myAnimator;
 
     // Start is called before the first frame update
@@ -19,7 +17,7 @@ public class CrowdAnimationScript : MonoBehaviour
 
     void SetCrowdAnimations()
     {
-        var rnd = UnityEngine.Random.Range(0, 5);
+        var rnd = UnityEngine.Random.Range(0, 3);
 
         switch (rnd)
         {
@@ -38,16 +36,7 @@ public class CrowdAnimationScript : MonoBehaviour
                 myAnimator.SetTrigger("Cheer3");
 
                 break;
-            case 3:
 
-                myAnimator.SetTrigger("Cheer4");
-
-                break;
-            case 4:
-
-                myAnimator.SetTrigger("Cheer5");
-
-                break;
         }
 
     }

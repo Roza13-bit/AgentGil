@@ -62,6 +62,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Diver_Animations
       objectReference: {fileID: 0}
+    - target: {fileID: 1600783953200576289, guid: 752fed0451de5f2408dae3b5f2ee9740,
+        type: 3}
+      propertyPath: m_TagString
+      value: MyGuy
+      objectReference: {fileID: 0}
     - target: {fileID: 2124837190446493083, guid: 752fed0451de5f2408dae3b5f2ee9740,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,6 +121,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932357684762096360, guid: 752fed0451de5f2408dae3b5f2ee9740,
+        type: 3}
+      propertyPath: m_TagString
+      value: MyGuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973028056685486753, guid: 752fed0451de5f2408dae3b5f2ee9740,
+        type: 3}
+      propertyPath: m_TagString
+      value: MyGuy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637168723264954154, guid: 752fed0451de5f2408dae3b5f2ee9740,
+        type: 3}
+      propertyPath: m_TagString
+      value: MyGuy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 752fed0451de5f2408dae3b5f2ee9740, type: 3}
