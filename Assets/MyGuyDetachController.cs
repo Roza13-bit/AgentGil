@@ -6,6 +6,12 @@ public class MyGuyDetachController : MonoBehaviour
 {
     [SerializeField] CenterGuysSphereScript cgsSC;
 
+    [SerializeField] Camera cameraFOV;
+
+    [SerializeField] float cameraFOVSpeed;
+
+    [SerializeField] float fovToAdd;
+
     private GameObject greyGuy;
 
     private bool hasCollidedDetach = false;
@@ -23,9 +29,35 @@ public class MyGuyDetachController : MonoBehaviour
         {
             hasCollidedDetach = true;
 
+            StartCoroutine(LerpCameraFOV());
+
             cgsSC.GuyRemoveSequance();
 
             greyGuy.SetActive(true);
+
+        }
+
+    }
+
+    private IEnumerator LerpCameraFOV()
+    {
+        var endFOV = cameraFOV.fieldOfView - fovToAdd;
+
+        var timeSinceStartedFOV = 0.0f;
+
+        while (true)
+        {
+            timeSinceStartedFOV += Time.deltaTime;
+
+            cameraFOV.fieldOfView = Mathf.Lerp(cameraFOV.fieldOfView, endFOV, timeSinceStartedFOV * cameraFOVSpeed);
+
+            if (cameraFOV.fieldOfView == endFOV)
+            {
+                yield break;
+
+            }
+
+            yield return null;
 
         }
 

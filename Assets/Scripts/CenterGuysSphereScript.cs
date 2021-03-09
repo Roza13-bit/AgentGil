@@ -23,6 +23,8 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     [SerializeField] GameObject losePopup;
 
+    [SerializeField] GameObject TopUI;
+
     [Header("Speed Controls")]
 
     [SerializeField] float gameTime;
@@ -167,9 +169,13 @@ public class CenterGuysSphereScript : MonoBehaviour
 
         if (activeGuys.Count == 0)
         {
+            TopUI.SetActive(false);
+
             losePopup.SetActive(true);
 
             // GameLostCoroutine();
+
+            Destroy(gameObject);
 
         }
 
@@ -223,7 +229,7 @@ public class CenterGuysSphereScript : MonoBehaviour
     {
         var timeSinceStartedRot = 0.0f;
 
-        while (true)
+        while (true && activeGuys[y] != null)
         {
             activeGuys[y].transform.localRotation = Quaternion.RotateTowards(activeGuys[y].transform.localRotation, guysTransform[y].localRotation, timeSinceStartedRot * rotSpeed);
             timeSinceStartedRot += Time.deltaTime;

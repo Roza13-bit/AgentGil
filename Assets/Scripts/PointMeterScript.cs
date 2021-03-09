@@ -31,9 +31,13 @@ public class PointMeterScript : MonoBehaviour
 
     [SerializeField] VisualEffect[] fireworksArray = new VisualEffect[4];
 
+    [SerializeField] Animator[] spotlightsArray = new Animator[2];
+
     [SerializeField] float waitAtEnd;
 
     [SerializeField] float buttonSpeed;
+
+    [SerializeField] GameObject TopUI;
 
     private Vector3 buttonEndPos;
 
@@ -91,6 +95,12 @@ public class PointMeterScript : MonoBehaviour
 
     private void PointMeterClick()
     {
+        foreach (Animator anime in spotlightsArray)
+        {
+            anime.SetTrigger("SpotlightOn");
+
+        }
+
         foreach (GameObject item in cgsSC.guysParachute)
         {
             item.SetActive(false);
@@ -110,15 +120,18 @@ public class PointMeterScript : MonoBehaviour
         }
 
         StartCoroutine(OpenWinPopup());
+
     }
 
     private IEnumerator OpenWinPopup()
     {
         yield return new WaitForSeconds(waitAtEnd);
 
-        diamondFinal.text = "X " + canvasControlSC.diamondsGained;
+        diamondFinal.text = " X " + canvasControlSC.diamondsGained;
 
-        diamondFinal1.text = "X " + canvasControlSC.diamondsGained;
+        diamondFinal1.text = " X " + canvasControlSC.diamondsGained;
+
+        TopUI.SetActive(false);
 
         winPopup.SetActive(true);
 
