@@ -61,6 +61,10 @@ public class PointMeterScript : MonoBehaviour
 
             centerSphereRB.isKinematic = false;
 
+            centerSphereRB.mass = 2;
+
+            centerSphereRB.freezeRotation = true;
+
             // cameraSC.isLanded = true;
 
             StartCoroutine(StartButtonClickLerp());

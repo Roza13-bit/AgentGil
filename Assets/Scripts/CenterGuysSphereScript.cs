@@ -187,6 +187,16 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     }
 
+    public void UnparentActiveGuys()
+    {
+        for (int x = 0; x < activeGuys.Count; x++)
+        {
+            activeGuys[x].transform.SetParent(null);
+
+        }
+
+    }
+
     private void GameLostCoroutine()
     {
         Time.timeScale = 0.1f;
