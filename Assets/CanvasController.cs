@@ -14,6 +14,8 @@ public class CanvasController : MonoBehaviour
 
     [SerializeField] Animator niceTmpAnimator;
 
+    public ParticleSystem bubbleBlowPS;
+
     public int diamondsGained;
 
     public float waitForNicePopup;
@@ -89,5 +91,12 @@ public class CanvasController : MonoBehaviour
 
     }
 
+    public void PlayBubbleParticleInPosition(Vector3 pos)
+    {
+        bubbleBlowPS.transform.position = pos;
+
+        bubbleBlowPS.Play();
+
+    }
 
 }

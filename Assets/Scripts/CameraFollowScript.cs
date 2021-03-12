@@ -48,7 +48,7 @@ public class CameraFollowScript : MonoBehaviour
 
     private void Start()
     {
-        endPos = new Vector3(42.2f, cameraEndY, cameraEndZ);
+        endPos = new Vector3(38f, cameraEndY, cameraEndZ);
 
         endRot.eulerAngles = new Vector3(5.31f, -18.2f, 0f);
 

@@ -28,6 +28,8 @@ public class MyGuysAttachController : MonoBehaviour
 
             StartCoroutine(LerpCameraFOV());
 
+            canvasControl.PlayBubbleParticleInPosition(transform.localPosition);
+
             canvasControl.NiceTextStartSequance();
 
             cgsSC.GuyPickupSequance();
