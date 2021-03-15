@@ -221,15 +221,24 @@ public class CenterGuysSphereScript : MonoBehaviour
 
         while (true)
         {
-            activeGuys[y].transform.localPosition = Vector3.MoveTowards(activeGuys[y].transform.localPosition, guysTransform[y].localPosition, timeSinceStartedPos * posSpeed);
-            timeSinceStartedPos += Time.deltaTime;
+            if (y <= activeGuys.Count - 1)
+            {
+                activeGuys[y].transform.localPosition = Vector3.MoveTowards(activeGuys[y].transform.localPosition, guysTransform[y].localPosition, timeSinceStartedPos * posSpeed);
+                timeSinceStartedPos += Time.deltaTime;
 
-            if (activeGuys[y].transform.localPosition == guysTransform[y].localPosition)
+                if (activeGuys[y].transform.localPosition == guysTransform[y].localPosition || !activeGuys[y].activeSelf)
+                {
+                    yield break;
+                }
+
+                yield return null;
+
+            }
+            else
             {
                 yield break;
-            }
 
-            yield return null;
+            }
 
         }
 
@@ -239,17 +248,26 @@ public class CenterGuysSphereScript : MonoBehaviour
     {
         var timeSinceStartedRot = 0.0f;
 
-        while (true && activeGuys[y] != null)
+        while (true)
         {
-            activeGuys[y].transform.localRotation = Quaternion.RotateTowards(activeGuys[y].transform.localRotation, guysTransform[y].localRotation, timeSinceStartedRot * rotSpeed);
-            timeSinceStartedRot += Time.deltaTime;
+            if (y <= activeGuys.Count - 1)
+            {
+                activeGuys[y].transform.localRotation = Quaternion.RotateTowards(activeGuys[y].transform.localRotation, guysTransform[y].localRotation, timeSinceStartedRot * rotSpeed);
+                timeSinceStartedRot += Time.deltaTime;
 
-            if (activeGuys[y].transform.localRotation == guysTransform[y].localRotation)
+                if (activeGuys[y].transform.localRotation == guysTransform[y].localRotation)
+                {
+                    yield break;
+                }
+
+                yield return null;
+
+            }
+            else
             {
                 yield break;
-            }
 
-            yield return null;
+            }
 
         }
 
