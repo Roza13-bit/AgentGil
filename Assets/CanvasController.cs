@@ -48,7 +48,7 @@ public class CanvasController : MonoBehaviour
         {
             case 0:
 
-                tmpText = "Amazing!";
+                tmpText = "Sweet!";
 
                 break;
             case 1:
@@ -63,7 +63,7 @@ public class CanvasController : MonoBehaviour
                 break;
             case 3:
 
-                tmpText = "Awesome!";
+                tmpText = "Wow!";
 
                 break;
 

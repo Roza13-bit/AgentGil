@@ -33,7 +33,7 @@ public class MyGuyDetachController : MonoBehaviour
 
             cgsSC.GuyRemoveSequance();
 
-            greyGuy.SetActive(true);
+            // greyGuy.SetActive(true);
 
         }
 
