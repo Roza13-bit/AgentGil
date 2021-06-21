@@ -31,7 +31,7 @@ public class MyGuyDetachController : MonoBehaviour
 
             StartCoroutine(LerpCameraFOV());
 
-            cgsSC.GuyRemoveSequance();
+            cgsSC.GuyRemoveSequance(this.gameObject);
 
             // greyGuy.SetActive(true);
 

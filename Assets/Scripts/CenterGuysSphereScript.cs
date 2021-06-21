@@ -155,17 +155,21 @@ public class CenterGuysSphereScript : MonoBehaviour
 
     }
 
-    public void GuyRemoveSequance()
+    public void GuyRemoveSequance(GameObject enemy)
     {
-        Debug.Log("Active Guys Length : " + activeGuys.Count);
+        Debug.Log("Active Guys Length Before : " + activeGuys.Count);
 
-        activeGuys[activeGuys.Count - 1].SetActive(false);
+        activeGuys[activeGuys.Count - 1].transform.parent = enemy.transform;
 
-        Debug.Log("Active Guys Length : " + activeGuys.Count);
+        activeGuys[activeGuys.Count - 1].transform.localPosition = new Vector3(-5.69f, 0f, 3.36f);
+
+        activeGuys[activeGuys.Count - 1].transform.localRotation = Quaternion.Euler(new Vector3(-40f, 0f, 0f));
+
+        // Debug.Log("Active Guys Length : " + activeGuys.Count);
 
         activeGuys.RemoveAt(activeGuys.Count - 1);
 
-        Debug.Log("Active Guys Length : " + activeGuys.Count);
+        Debug.Log("Active Guys Length After : " + activeGuys.Count);
 
         if (activeGuys.Count == 0)
         {
