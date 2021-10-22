@@ -95,9 +95,9 @@ public class CenterGuysSphereScript : MonoBehaviour
         {
             timeSinceStartedLandingSequance += Time.deltaTime;
 
-            guy.transform.localRotation = Quaternion.RotateTowards(guy.transform.localRotation, guyLandingQuat, timeSinceStartedLandingSequance * landRotSpeed * 10f);
+            guy.transform.localRotation = Quaternion.RotateTowards(guy.transform.localRotation, guyLandingQuat, timeSinceStartedLandingSequance * landRotSpeed * 15f);
 
-            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, sphereLandingQuat, timeSinceStartedLandingSequance * landRotSpeed * 2);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, sphereLandingQuat, timeSinceStartedLandingSequance * landRotSpeed * 15);
 
             if (transform.localRotation == sphereLandingQuat && guy.transform.localRotation == guyLandingQuat)
             {
